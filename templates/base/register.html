@@ -1,0 +1,49 @@
+{% extends 'base.html'%} 
+{% load crispy_forms_tags %} 
+{%load static %} {%block title %} Login {%endblock%}
+ {% block content%}
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem">
+          {%include 'messages.html'%}
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-6 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <form action="{% url 'register' %}" method="POST">
+                  <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                    Sign into your account
+                  </h3>
+                  
+                  {% csrf_token %} {{form|crispy}}
+                  <div class="pt-1 mb-4">
+                    <button class="btn btn-dark btn-lg btn-block" type="submit">
+                      Register
+                    </button>
+                  </div>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81">
+                    Already had an account?
+                    <a href="{%url 'login'%}" style="color: #393f81"
+                      >Login </a
+                    >
+                  </p>
+                  
+                </form>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 d-none d-md-block">
+              <img
+                src="{% static 'images/store2.jpg'%}"
+                alt="login form"
+                class="img-fluid"
+                style="border-radius: 0 1rem 1rem 0"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%endblock%}
