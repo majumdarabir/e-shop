@@ -1,13 +1,7 @@
-from distutils.log import error
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from store.models import Product
-from store.models import Category
+from django.contrib.auth.hashers import make_password
 from store.models.customer import Customer
-from django.contrib.auth.hashers import make_password, check_password
-from django.contrib.auth import authenticate, login
 from django.views import View
-# Create your views here.
 
 
 class Signup(View):
@@ -18,21 +12,27 @@ class Signup(View):
         postData = request.POST
         first_name = postData.get('firstname')
         last_name = postData.get('lastname')
-        mobile = postData.get('mobile')
+        phone = postData.get('phone')
         email = postData.get('email')
         password = postData.get('password')
+        # validation
         value = {
             'first_name': first_name,
             'last_name': last_name,
-            'mobile': mobile,
+            'phone': phone,
             'email': email
-
         }
         error_message = None
-        customer = Customer(first_name=first_name, last_name=last_name,
-                            mobile=mobile, email=email, password=password)
-        error_message = self.valid(customer)
+
+        customer = Customer(first_name=first_name,
+                            last_name=last_name,
+                            phone=phone,
+                            email=email,
+                            password=password)
+        error_message = self.validateCustomer(customer)
+
         if not error_message:
+            print(first_name, last_name, phone, email, password)
             customer.password = make_password(customer.password)
             customer.register()
             return redirect('homepage')
@@ -43,30 +43,26 @@ class Signup(View):
             }
             return render(request, 'signup.html', data)
 
-    def valid(customer):
+    def validateCustomer(self, customer):
         error_message = None
-        spacialchar = '@'
-        if not customer.password:
-            error_message = 'Password Required'
-        elif customer.password:
-            if len(customer.password) < 6:
-                error_message = 'Password must contain 6 digits'
-            else:
-                if not spacialchar in customer.password:
-                    error_message = 'Password must contain special charector'
-        if not customer.mobile:
-            error_message = 'Mobile Number Required'
-        elif customer.mobile:
-            if len(customer.mobile) < 10:
-                error_message = 'Mobile Number must be 10 digits long'
-        if not customer.last_name:
+        if (not customer.first_name):
+            error_message = "First Name Required !!"
+        elif len(customer.first_name) < 4:
+            error_message = 'First Name must be 4 char long or more'
+        elif not customer.last_name:
             error_message = 'Last Name Required'
-        elif customer.last_name:
-            if len(customer.last_name) < 4:
-                customer.error_message = 'Last Name must be 4 char long'
-        if not customer.first_name:
-            error_message = "First Name Required"
-        elif customer.first_name:
-            if len(customer.first_name) < 4:
-                customer.error_message = 'First Name must be 4 char long'
+        elif len(customer.last_name) < 4:
+            error_message = 'Last Name must be 4 char long or more'
+        elif not customer.phone:
+            error_message = 'Phone Number required'
+        elif len(customer.phone) < 10:
+            error_message = 'Phone Number must be 10 char Long'
+        elif len(customer.password) < 6:
+            error_message = 'Password must be 6 char long'
+        elif len(customer.email) < 5:
+            error_message = 'Email must be 5 char long'
+        elif customer.isExists():
+            error_message = 'Email Address Already Registered..'
+        # saving
+
         return error_message
