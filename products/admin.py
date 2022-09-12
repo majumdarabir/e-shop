@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
-from .models import Category, Product
+from .models import Category, Product, Tag
 # Register your models here.
 
 
@@ -11,4 +11,9 @@ class CategoryAdmin(ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(ModelAdmin):
+    pass
+
+
+@admin.register(Tag)
+class TagsAdmin(ModelAdmin):
     pass

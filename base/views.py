@@ -1,16 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegistrationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
+from .forms import RegistrationForm
+
 
 def register_user(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
-        pass
+        return redirect("home")
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -30,12 +31,12 @@ def register_user(request: HttpRequest) -> HttpResponse:
 
 def login_user(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
-        pass
+        return redirect("home")
     if request.method == 'POST':
         form: AuthenticationForm = AuthenticationForm(request.POST)
         user_info = {
             "username": request.POST.get("username"),
-            " password": request.POST.get('password')
+            "password": request.POST.get('password')
         }
         user = authenticate(request, **user_info)
         if user:
@@ -50,12 +51,8 @@ def login_user(request: HttpRequest) -> HttpResponse:
         return render(request, 'base/signin.html', {'form': form})
 
 
-def home(request: HttpRequest) -> HttpResponse:
-    if not request.user.is_authenticated:
-        return redirect("login")
-    return render(request, 'index.html')
-
-
 @login_required
 def logout_user(request: HttpRequest):
     logout(request)
+    messages.success(request, "Successfully logger out ")
+    return redirect("home")
