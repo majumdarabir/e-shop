@@ -5,7 +5,7 @@
 {% load cart %}
 {% load customer_filter %}
 <!-- body -->
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-3 bg-light">
     <div class="row">
 
 
@@ -31,7 +31,9 @@
                     <img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
                     <div class="card-body">
                         <p class="card-title">{{product.name}}</p>
+                        <p class="card-text"></p>{{product.quantity}}</p>
                         <p class="card-text"><b>{{product.price|currency}}</b></p>
+                        
                         <!-- {{product | is_in_cart:request.session.cart }} -->
                     </div>
 
@@ -56,7 +58,7 @@
                         <form action="/#{{product.id}}" method="POST" class="btn-block">
                             {% csrf_token %}
                             <input hidden type="text" name='product' value='{{product.id}}'>
-                            <input type="submit" class="float-right btn btn-light  form-control" value="Add To Cart">
+                            <input type="submit" class="float-right btn btn-primary  form-control" value="Add To Cart">
                         </form>
                         {% endif %}
 
