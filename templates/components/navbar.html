@@ -1,3 +1,5 @@
+{% load crispy_forms_tags %}
+{%load static %}
 <div class="container-fluid">
   <div class="row align-items-center py-3 px-xl-5">
     <div class="col-lg-3 d-none d-lg-block">
@@ -11,16 +13,17 @@
     <div class="col-lg-6 col-6 text-left">
       <form action="">
         <div class="input-group">
+          <!-- {{form|crispy}} -->
           <input
             type="text"
             class="form-control"
             placeholder="Search for products"
           />
-          <div class="input-group-append">
+          <button >
             <span class="input-group-text bg-transparent text-primary">
               <i class="fa fa-search"></i>
             </span>
-          </div>
+          </button>
         </div>
       </form>
     </div>

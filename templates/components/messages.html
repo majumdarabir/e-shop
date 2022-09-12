@@ -6,7 +6,7 @@
             role="alert"
             >
             <strong>{{ message}}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close alert-dismissible " data-mdb-dismiss="alert" aria-label="Close"></button>
             </div>
         {%else%}
             <div
@@ -14,7 +14,7 @@
             role="alert"
             >
             <strong>{{ message}}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close .alert-dismissible " data-mdb-dismiss="alert" aria-label="Close"></button>
             </div>
         {%endif%} 
     {% endfor %}
