@@ -1,44 +1,106 @@
-{% load crispy_forms_tags %}
-{%load static %}
-<div class="container-fluid">
-  <div class="row align-items-center py-3 px-xl-5">
-    <div class="col-lg-3 d-none d-lg-block">
-      <a href="" class="text-decoration-none">
-        <h1 class="m-0 display-5 font-weight-semi-bold">
-          <span class="text-primary font-weight-bold border px-3 mr-1">E</span
-          >Shopper
-        </h1>
-      </a>
-    </div>
-    <div class="col-lg-6 col-6 text-left">
-      <form action="">
-        <div class="input-group">
-          <!-- {{form|crispy}} -->
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search for products"
-          />
-          <button >
-            <span class="input-group-text bg-transparent text-primary">
-              <i class="fa fa-search"></i>
-            </span>
-          </button>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+  <div class="container">
+    <a class="navbar-brand me-2" href="{%url 'home'%}">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/5224/5224110.png"
+        height="16"
+        alt="MDB Logo"
+        loading="lazy"
+        style="margin-top: -1px"
+      />
+     
+    </a>
+    <!-- <p class="text-uppercase navbar-brand">dj-medic-shop</p> -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <div class="d-flex me-auto">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'categories'%}">Categories</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'products'%}">Products</a>
+          </li>
+        </ul>
+      </div>
+
+      <form class="d-flex input-group w-auto">
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Type query"
+          aria-label="Search"
+        />
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          data-mdb-ripple-color="dark"
+        >
+          Search
+        </button>
       </form>
-    </div>
-    <div class="col-lg-3 col-6 text-right">
-      <a href="" class="btn border">
-        <i class="fas fa-heart text-primary"></i>
-        <span class="badge text-primary">0</span>
-      </a>
-      <a href="" class="btn border">
-        <i class="fas fa-shopping-cart text-primary"></i>
-        <span class="badge text-primary">0</span>
-      </a>
-      <a href="{%url 'logout'%}" class="btn border">
-        <i class="fas fa-arrow-up-left-from-circle"></i>
-      </a>
+      <ul class="navbar-nav">
+        <li class="nav-tem">
+            <li class="nav-item me-3 me-lg-1">
+              <a class="nav-link" href="#">
+                <span><i class="fas fa-shopping-bag fa-lg"></i></span>
+              </a>
+            </li>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bell"></i>
+            <span class="badge rounded-pill badge-notification bg-danger"
+              >1</span
+            >
+          </a>
+        </li>
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a class="nav-link d-sm-flex align-items-sm-center" href="#">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+              class="rounded-circle"
+              height="22"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+            />
+            <strong class="d-none d-sm-block ms-1">John</strong>
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item" href="#">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Settings</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
+</nav>
