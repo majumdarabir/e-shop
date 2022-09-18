@@ -8,11 +8,17 @@ class Review(models.Model):
     comment = models.CharField(max_length=250, null=False)
     reviewed_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self) -> str:
+        return f"{self.user}"
+
 
 class Like(models.Model):
     user = models.ForeignKey(Customers, on_delete=models.CASCADE)
     is_liked = models.BooleanField(default=False, null=False)
     liked_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f"{self.user}"
 
 
 class Item(models.Model):

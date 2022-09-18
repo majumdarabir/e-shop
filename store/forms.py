@@ -2,7 +2,7 @@ from django import forms
 
 
 class SearchForm(forms.Form):
-    search = forms.CharField(required=True)
+    search = forms.CharField(required=True, max_length=200)
 
     class Meta:
         widgets = {
