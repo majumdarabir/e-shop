@@ -1,4 +1,5 @@
 from django import forms
+from .models import Review
 
 
 class SearchForm(forms.Form):
@@ -12,4 +13,17 @@ class SearchForm(forms.Form):
                     'class': 'form-control'
                 }
             ),
+        }
+
+
+class ReviewForms(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        fields = ('comment',)
+        help_texts = {
+            'comment': 'Add your commnet',
+        }
+        labels = {
+            'comment': None
         }
