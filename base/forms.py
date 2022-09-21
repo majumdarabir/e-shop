@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
-from django import forms
 from django.contrib.auth.models import User
+from django import forms
+
+from .models import Customer
 
 
 class RegistrationForm(UserCreationForm):
@@ -18,3 +20,9 @@ class RegistrationForm(UserCreationForm):
             'password2': None,
             'username': None,
         }
+
+
+class CustomerUpgradeForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = '__all__'
