@@ -1,0 +1,22 @@
+{
+  "[python]": {
+    "editor.wordBasedSuggestions": false,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "[markdown]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": true,
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "strings": "on"
+    }
+  },
+  "[html]": {
+    "editor.suggest.insertMode": "replace",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true
+  }
+}
