@@ -15,7 +15,7 @@
   },
   "[html]": {
     "editor.suggest.insertMode": "replace",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": true
   }
