@@ -2,7 +2,7 @@
 {% load static %} 
 {%block title %}Categories{%endblock%}
 {% block content %}
-<div class="container-fluid pt-5">
+<div class="container pt-2">
     <div class="row px-xl-3 pb-2">
         <h2 class="text-uppercase mb-2" style="text-align: center">all categories</h2>
         {% for category in categories%}
@@ -14,10 +14,8 @@
                 <div class="card-body">
                     <a href="{%url 'category-detailed' category.id%}" class="stretched-link"></a>
                     <h5 class="card-title text-muted">{{category.name}}</h5>
-                    <p class="card-text text-muted">{{category.description}}</p>      
+                   
                 </div>
-                <p class="card-footer text-muted pb-0">
-                    Last Updated At: {{category.updated_at}}
                 </p>
             </div>
         </div>

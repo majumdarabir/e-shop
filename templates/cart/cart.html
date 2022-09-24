@@ -1,0 +1,275 @@
+{%extends 'base.html'%} {%load static%} {%block title%}Cart{%endblock%} 
+{%block content%}
+
+<div class="row container">
+  <div class="col-4">
+    <div class="list-group list-group-light" id="list-tab" role="tablist">
+      <a
+        class="list-group-item list-group-item-action active px-3 border-0"
+        id="list-home-list"
+        data-mdb-toggle="list"
+        href="#list-home"
+        role="tab"
+        aria-controls="list-home"
+        >
+        <div class="d-flex align-items-center">
+        <img
+          src="http://localhost:8000/media/products/41UMlMtw05L.jpg"
+          alt="{{review.user.image}}"
+          style="width: 45px; height: 45px"
+          class="rounded-circle"
+        />
+        <div class="ms-3">
+          <p class="fw-bold mb-1 text-capitalize">Abcd</p>
+          <p class="text-muted mb-0 text-capitalize">akd</p>
+        </div>
+      </div>
+        </a
+      >
+      <a
+        class="list-group-item list-group-item-action px-3 border-0"
+        id="list-profile-list"
+        data-mdb-toggle="list"
+        href="#list-profile"
+        role="tab"
+        aria-controls="list-profile"
+        >Profile</a
+      >
+      <a
+        class="list-group-item list-group-item-action px-3 border-0"
+        id="list-messages-list"
+        data-mdb-toggle="list"
+        href="#list-messages"
+        role="tab"
+        aria-controls="list-messages"
+        >Messages</a
+      >
+      <a
+        class="list-group-item list-group-item-action px-3 border-0"
+        id="list-settings-list"
+        data-mdb-toggle="list"
+        href="#list-settings"
+        role="tab"
+        aria-controls="list-settings"
+        >Settings</a
+      >
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div
+        class="tab-pane fade show active"
+        id="list-home"
+        role="tabpanel"
+        aria-labelledby="list-home-list"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore impedit
+        quibusdam exercitationem eligendi voluptate doloribus non pariatur
+        libero quod nobis mollitia odio dolore eos debitis iure, autem quisquam
+        ullam beatae.
+      </div>
+      <div
+        class="tab-pane fade"
+        id="list-profile"
+        role="tabpanel"
+        aria-labelledby="list-profile-list"
+      >
+        Ea eos asperiores deserunt reprehenderit voluptatem deleniti dolor iure
+        eum consectetur commodi.
+      </div>
+      <div
+        class="tab-pane fade"
+        id="list-messages"
+        role="tabpanel"
+        aria-labelledby="list-messages-list"
+      >
+        Et perspiciatis facilis labore natus at necessitatibus. Sequi earum qui
+        illum reiciendis? Excepturi, dicta consequuntur, voluptas aspernatur,
+        quis laboriosam exercitationem quasi officia tempore iste assumenda
+        aliquam.
+      </div>
+      <div
+        class="tab-pane fade"
+        id="list-settings"
+        role="tabpanel"
+        aria-labelledby="list-settings-list"
+      >
+        Praesentium asperiores nemo ratione quas atque excepturi odio aliquid
+        libero, architecto aspernatur expedita, corrupti, rem odit quos
+        exercitationem maxime at. Ex, eveniet rerum laborum accusamus delectus
+        magnam maxime!
+      </div>
+    </div>
+  </div>
+</div>
+{%include 'components/footer.html'%} {%endblock%}
+
+<section class="padding-y bg-white shadow-sm">
+  <div class="container">
+    <div class="row">
+      <aside class="col-lg-6">
+        <article class="gallery-wrap gallery-vertical">
+          <a href="#" class="img-big-wrap img-thumbnail bg-light">
+            <img
+              height="520"
+              src="bootstrap5-ecommerce/images/items/detail2/big.jpg"
+              class="mix-blend-multiply"
+            />
+          </a>
+          <!-- img-big-wrap.// -->
+          <div class="thumbs-wrap mb-3">
+            <a href="#" class="item-thumb">
+              <img
+                width="60"
+                height="60"
+                src="bootstrap5-ecommerce/images/items/detail2/thumb1.jpg"
+              />
+            </a>
+            <a href="#" class="item-thumb">
+              <img
+                width="60"
+                height="60"
+                src="bootstrap5-ecommerce/images/items/detail2/thumb2.jpg"
+              />
+            </a>
+            <a href="#" class="item-thumb">
+              <img
+                width="60"
+                height="60"
+                src="bootstrap5-ecommerce/images/items/detail2/thumb3.jpg"
+              />
+            </a>
+            <a href="#" class="item-thumb">
+              <img
+                width="60"
+                height="60"
+                src="bootstrap5-ecommerce/images/items/detail2/thumb4.jpg"
+              />
+            </a>
+            <a href="#" class="item-thumb">
+              <img
+                width="60"
+                height="60"
+                src="bootstrap5-ecommerce/images/items/detail2/thumb1.jpg"
+              />
+            </a>
+            <a href="#" class="item-thumb">
+              <img
+                width="60"
+                height="60"
+                src="bootstrap5-ecommerce/images/items/detail2/thumb2.jpg"
+              />
+            </a>
+            <a href="#" class="item-thumb">
+              <img
+                width="60"
+                height="60"
+                src="bootstrap5-ecommerce/images/items/detail2/thumb3.jpg"
+              />
+            </a>
+          </div>
+          <!-- thumbs-wrap.// -->
+        </article>
+        <!-- gallery-wrap .end// -->
+      </aside>
+      <div class="col-lg-6">
+        <article class="ps-lg-3">
+          <h4 class="title text-dark">
+            Mens Long Sleeve T-shirt Cotton Base <br />
+            Layer Slim Muscle
+          </h4>
+          <div class="rating-wrap my-3">
+            <ul class="rating-stars">
+              <li style="width: 80%" class="stars-active">
+                <img
+                  src="bootstrap5-ecommerce/images/misc/stars-active.svg"
+                  alt=""
+                />
+              </li>
+              <li>
+                <img
+                  src="bootstrap5-ecommerce/images/misc/starts-disable.svg"
+                  alt=""
+                />
+              </li>
+            </ul>
+            <b class="label-rating text-warning"> 4.5</b> <i class="dot"></i>
+            <span class="label-rating text-muted">
+              <i class="fa fa-comment"></i> 32 reviews
+            </span>
+            <i class="dot"></i>
+            <span class="label-rating text-muted">
+              <i class="fa fa-shopping-basket"></i> 154 orders</span
+            >
+          </div>
+          <!-- rating-wrap.// -->
+          <hr />
+          <ul class="list-check cols-two mb-4">
+            <li>Optical heart sensor</li>
+            <li>Some feature name</li>
+            <li>Super fast and amazing</li>
+            <li>Optical heart sensor</li>
+            <li>Easy fast and ver good</li>
+            <li>Metallic corpus</li>
+            <li>Modern style and design</li>
+          </ul>
+          <div class="mb-3">
+            <label class="text-muted mb-2">Choose style</label>
+            <div>
+              <label class="checkbox-btn">
+                <input type="radio" name="choose_22" />
+                <span class="btn btn-light"> Orange </span>
+              </label>
+              <label class="checkbox-btn">
+                <input type="radio" name="choose_22" />
+                <span class="btn btn-light"> Green </span>
+              </label>
+              <label class="checkbox-btn">
+                <input type="radio" name="choose_22" />
+                <span class="btn btn-light"> Black </span>
+              </label>
+              <label class="checkbox-btn">
+                <input type="radio" name="choose_22" />
+                <span class="btn btn-light"> White </span>
+              </label>
+            </div>
+          </div>
+          <div class="mb-4">
+            <var class="price h5">$98.00</var> <span>/ 1 box, incl VAT </span>
+          </div>
+          <!-- price-wrap.// -->
+          <div class="row gx-2 mb-4">
+            <div class="col-2">
+              <select class="form-select">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+            <!-- col.// -->
+            <div class="col-auto">
+              <a href="#" class="btn btn-primary w-100">
+                <i class="me-2 fa fa-shopping-basket"></i> Add to cart
+              </a>
+            </div>
+            <!-- col.// -->
+            <div class="col">
+              <a href="#" class="btn btn-light btn-icon">
+                <i class="fas fa-heart"></i>
+              </a>
+            </div>
+            <!-- col.// -->
+          </div>
+          <!-- row.// -->
+          <label class="form-check">
+            <input class="form-check-input" type="checkbox" value="" />
+            <span class="form-check-label"> Add to compare </span>
+          </label>
+        </article>
+      </div>
+      <!-- col.// -->
+    </div>
+    <!-- row.// -->
+  </div>
+  <!-- container .// -->
+</section>

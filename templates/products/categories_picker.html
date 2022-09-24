@@ -1,19 +1,17 @@
-<div class="list-group list-group-light" id="list-tab" role="tablist">
+<div class="list-group list-group-light">
   {%for category in categories%}
   <a
-    class="list-group-item list-group-item-action px-3 border-bottom"
-    id="list-home-list"
-    data-mdb-toggle="list"
-    href="#{{category.name}}"
-    role="tab"
-    aria-controls="list-home"
+    class="list-group-item list-group-item-action px-0 border-0  {%if current_category == category %} active {%endif%}"
+    href="{%url 'product-of-category' category.name %}"
+    aria-current="true"
   >
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center"> 
       <img
         src="/media/{{category.image}}"
         alt="{{review.user.image}}"
-        style="width: 45px; height: 45px"
+        style="width: 45px; height: 45px;"
         class="rounded-circle"
+
       />
       <div class="ms-3">
         <p class="fw-bold mb-1 text-capitalize">{{category.name}}</p>
