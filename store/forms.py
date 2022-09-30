@@ -20,7 +20,7 @@ class ReviewForms(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ('comment',)
+        fields = ('review', 'ratings')
         help_texts = {
             'comment': 'Add your commnet',
         }

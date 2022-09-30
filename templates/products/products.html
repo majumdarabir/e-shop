@@ -1,56 +1,40 @@
-{% extends 'base.html' %} {% load static %} {%block title %}Products{%endblock%}
+{% extends 'base.html' %}
+{% load static %} {%block title %}Products{%endblock%}
 {% block content %}
-<div class="row">
-  <div class="col-lg-2">
-    <div class="accordion accordion-borderless" id="accordionFlushExampleX">
-      <div class="list-group list-group-light" id="list-tab" role="tablist">
-        <a href="{%url 'products' %}">
-          <li class="list-group-item px-3 border-0">All</li>
-        </a>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingTwoX">
-          <button
-            class="accordion-button collapsed show"
-            type="button"
-            data-mdb-toggle="collapse"
-            data-mdb-target="#flush-collapseTwoX"
-            aria-expanded="true"
-            aria-controls="flush-collapseTwoX"
-          >
-            Catergories
-          </button>
-        </h2>
-        <div
-          id="flush-collapseTwoX"
-          class="accordion-collapse collapse"
-          aria-labelledby="flush-headingTwoX"
-          data-mdb-parent="#accordionFlushExampleX"
-        >
-          <div class="accordion-body">
-            {%include './categories_picker.html' %}
-          </div>
-        </div>
+<div class="row px-2">
+  <div class="col-lg-3 col-md-4">
+    <div class="card-body px-0">
+      <div class="accordion accordion-borderless" id="accordionFlushExampleX">
+        {%include './categories_picker.html' %} 
+        {%include './price_filter.html'%}
       </div>
     </div>
   </div>
-  <div class="col-lg-8">
+
+  <div class="col-lg-9 col-md-8">
     <div class="row pb-2">
-      <h2 class="text-uppercase mb-2" style="text-align: center">
+      <h4 class="text-uppercase mb-3 col-12" style="text-align: center">
+        {%if current_category %}
+        {{current_category}}
+        {%else%}
         All products
-      </h2>
+        {%endif%}
+      </h4>
+      {%if products.count%} 
       {% for product in products%}
-      <div class="col-lg-4 col-md-6 pb-2">
+      <div class="col-lg-3 col-md-4 pb-1">
         <div class="card">
-          <img
-            src="/media/{{product.image}}"
-            alt="{{product.image}}"
-            class="img-fluid rounded-start"
-          />
+          <div class="h-50">
+            <img
+              src="/media/{{product.image}}"
+              alt="{{product.image}}"
+              class="rounded-start img-fluid px-3"
+            />
+          </div>
 
           <div class="card-body text-muted">
             <h5 class="card-title">{{product.name}}</h5>
-            <p class="card-text">{{product.description}}</p>
+            <!-- <p class="card-text">{{product.description}}</p> -->
             <h5 class="card-title">MRP: {{product.price}}</h5>
 
             <div class="card-footer px-0">
@@ -69,8 +53,21 @@
           </div>
         </div>
       </div>
-      {%endfor%}
+      {%endfor%} {%else%}
+      <div
+        class="d-flex align-items-center justify-content-center flex-column py-3"
+      >
+        <img
+          src="{% static 'images/empty-box.png'%}"
+          alt="Empty-box"
+          class="img-fluid"
+        />
+        <h3>No Items Found</h3>
+      </div>
+
+      {%endif%}
     </div>
   </div>
 </div>
 {%include 'components/footer.html'%} {%endblock%}
+

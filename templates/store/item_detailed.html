@@ -6,7 +6,10 @@
       <div class="row align-items-center">
         <aside class="col-lg-6">
           <article class="gallery-wrap gallery-vertical">
-            <a href="#" class="img-big-wrap img-thumbnail bg-light">
+            <a
+              href="/media/{{item.product.image}}"
+              class="img-big-wrap img-thumbnail bg-light"
+            >
               <img
                 height="520"
                 src="/media/{{item.product.image}}"
@@ -19,7 +22,6 @@
           <article class="ps-lg-3">
             <h4 class="title text-dark">{{item.product.name}}</h4>
             <p>{{item.product.description}}</p>
-            <!-- rating-wrap.// -->
             <hr />
             <ul class="list-check cols-two mb-4">
               {% for tag in item.product.tag.all %}
@@ -30,30 +32,23 @@
               <var class="price h5">Rs {{item.product.price}}</var>
               <span>/ each </span>
             </div>
-          
+
             <div class="row gx-2 mb-4">
- 
               <div class="col-auto">
                 <a href="#" class="btn btn-primary w-100">
                   <i class="me-2 fa fa-shopping-basket"></i> Add to cart
                 </a>
               </div>
-              <!-- col.// -->
               <div class="col">
                 <a href="#" class="btn btn-light btn-icon">
                   <i class="fas fa-heart"></i>
                 </a>
               </div>
-              <!-- col.// -->
             </div>
-            <!-- row.// -->
           </article>
         </div>
-        <!-- col.// -->
       </div>
-      <!-- row.// -->
     </div>
-    <!-- container .// -->
   </section>
   <h6
     class="bg-light p-2 border-top border-bottom d-flex justify-content-between"
@@ -62,41 +57,6 @@
     <span class="badge rounded-pill badge-info">{{item.likes.all|length}}</span>
   </h6>
 
-  <h6
-    class="bg-light p-2 border-top border-bottom d-flex justify-content-between"
-  >
-    <span class="small-text">Reviews</span>
-    <span class="badge rounded-pill badge-info"
-      >{{item.reviews.all|length}}</span
-    >
-  </h6>
-  <ul class="list-group list-group-light">
-    {% for review in item.reviews.all%}
-    <li
-      class="list-group-item d-flex justify-content-between align-items-center"
-    >
-      <div class="d-flex align-items-center">
-        <img
-          src="/media/{{review.user.image}}"
-          alt="{{review.user.image}}"
-          style="width: 45px; height: 45px"
-          class="rounded-circle"
-        />
-        <div class="ms-3">
-          <p class="fw-bold mb-1 text-capitalize">{{review.user}}</p>
-          <p class="text-muted mb-0 text-capitalize">{{review.comment}}</p>
-        </div>
-      </div>
-    </li>
-    {%endfor%}
-  </ul>
-  {% csrf_token %}{{review_form|crispy}}
-  <button
-    class="btn btn-outline-primary"
-    type="button"
-    data-mdb-ripple-color="dark"
-  >
-    Comment
-  </button>
+  {%include './reviews.html' %}
 </div>
-{%endblock%}
+{%include 'components/footer.html'%} {%endblock%}
