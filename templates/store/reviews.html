@@ -8,11 +8,11 @@
             <h6 class="d-flex justify-content-between">
               <span class="small-text">Reviews</span>
               <span class="badge rounded-pill badge-info"
-                >{{item.reviews.count}}</span
+                >{{item.review_set.count}}</span
               >
             </h6>
             <hr />
-            {% for review in item.reviews.all%}
+            {% for review in item.review_set.all%}
             <blockquote class="border-bottom">
               <div class="float-lg-end d-flex mb-3">
                 <div class="btn-group shadow-0" role="group">
@@ -20,15 +20,25 @@
                     type="button"
                     class="btn btn-outline-secondary"
                     data-mdb-color="dark"
+                    onclick="likeReview()"
                   >
-                    <i class="fa-regular fa-thumbs-up"></i>
+                    <i class="fa-regular fa-thumbs-up">
+                      <span class="badge rounded-pill badge-info"
+                        >{{review.liked_by.count}}</span
+                      >
+                    </i>
                   </button>
                   <button
                     type="button"
                     class="btn btn-outline-secondary"
                     data-mdb-color="dark"
+                    onclick="unlikeReview()"
                   >
-                    <i class="fa-regular fa-thumbs-down"></i>
+                    <i class="fa-regular fa-thumbs-down">
+                      <span class="badge rounded-pill badge-info"
+                        >{{review.unliked_by.count}}</span
+                      >
+                    </i>
                   </button>
                 </div>
               </div>
@@ -64,21 +74,59 @@
             {%endfor%}
           </div>
         </div>
-        <div class="card">
+      </div>
+
+      <div class="col-lg-4">
+        <article class="card">
+          <div class="card-body">
+            <div class="mt-3">
+          
+              <b class="label-rating text-lg">
+                {%if item.review_set.count%}
+                {{item.review_set.all|avg_ratings}} out of 5
+                {%endif%}
+              </b>
+            </div>
+            <p class="mt-1 text-muted">{{item.review_set.count}} reviews</p>
+            <table class="table table-borderless table-sm">
+              <tbody>
+                {%if item.review_set.all %}
+                {%for star,percentage in item.review_set.all|get_ratings %} 
+                {%if percentage%}
+                <tr valign="left">
+                  <td width="100">
+                    {{star}} <i class="fa-solid fa-star px-1"></i>
+                  </td>
+                  <td>
+                    <div class="progress rounded" style="height: 18px">
+                      <div
+                        class="progress-bar rounded"
+                        role="progressbar"
+                        style="width:{{percentage}}%"
+                        aria-valuenow="{{percentage}}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      >
+                        {{percentage}} %
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {%endif%} {%endfor%}
+                {%else%}
+                No recordes found
+                {%endif%}
+              </tbody>
+            </table>
+          </div>
+        </article>
+        <div class="card mt-4">
           <div class="card-body">
             <h5 class="card-title">Add a Review</h5>
             <form action="{%url 'add-commnet' item.id %}" method="post">
-              {{ review_form.non_field_errors }} 
-              {% csrf_token %}
-               {% ifform.subject.errors %}
-              <ol>
-                {% for error in form.subject.errors %}
-                <li><strong>{{ error|escape }}</strong></li>
-                {% endfor %}
-              </ol>
-              {% endif %} {{review_form|crispy}}
+              {% csrf_token %} {{review_form|crispy}}
               <button
-                class="btn btn-outline-primary w-100"
+                class="btn btn-primary w-100"
                 type="submit"
                 data-mdb-ripple-color="dark"
               >
@@ -88,116 +136,7 @@
           </div>
         </div>
       </div>
-
-      <div class="col-lg-4">
-        <article class="card">
-          <div class="card-body">
-            <a href="#" class="btn w-100 btn-primary-light">Write review</a>
-            <div class="rating-wrap mt-3">
-              <ul class="rating-stars stars-lg">
-                <li style="width: 80%" class="stars-active">
-                  <img
-                    src="bootstrap5-ecommerce/images/misc/stars-active.svg"
-                    alt=""
-                  />
-                </li>
-                <li>
-                  <img
-                    height="520"
-                    src="bootstrap5-ecommerce/images/misc/starts-disable.svg"
-                    alt=""
-                  />
-                </li>
-              </ul>
-              <b class="label-rating text-lg"> 4.6 out of 5 </b>
-            </div>
-
-            <p class="mt-1 text-muted">{{item.reviews.count}} reviews</p>
-            <table class="table table-borderless table-sm">
-              <tbody>
-                <tr valign="middle">
-                  <td width="50">5 star</td>
-                  <td>
-                    <div class="progress" style="height: 10px">
-                      <div
-                        class="progress-bar bg-warning"
-                        role="progressbar"
-                        style="width: 95%"
-                        aria-valuenow="25"
-                        aria-valuemax="100"
-                      ></div>
-                    </div>
-                  </td>
-                  <td width="50">95 %</td>
-                </tr>
-                <tr valign="middle">
-                  <td>4 star</td>
-                  <td>
-                    <div class="progress" style="height: 20px">
-                      <div
-                        class="progress-bar"
-                        role="progressbar"
-                        style="width: 25%"
-                        aria-valuenow="25"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      >
-                        25%
-                      </div>
-                    </div>
-                  </td>
-                  <td>80 %</td>
-                </tr>
-                <tr valign="middle">
-                  <td>3 star</td>
-                  <td>
-                    <div class="progress" style="height: 10px">
-                      <div
-                        class="progress-bar bg-warning"
-                        role="progressbar"
-                        style="width: 35%"
-                        aria-valuenow="35"
-                        aria-valuemax="100"
-                      ></div>
-                    </div>
-                  </td>
-                  <td>35 %</td>
-                </tr>
-                <tr valign="middle">
-                  <td>2 star</td>
-                  <td>
-                    <div class="progress" style="height: 10px">
-                      <div
-                        class="progress-bar bg-warning"
-                        role="progressbar"
-                        style="width: 13%"
-                        aria-valuenow="13"
-                        aria-valuemax="100"
-                      ></div>
-                    </div>
-                  </td>
-                  <td>13 %</td>
-                </tr>
-                <tr valign="middle">
-                  <td>1 star</td>
-                  <td>
-                    <div class="progress" style="height: 10px">
-                      <div
-                        class="progress-bar bg-warning"
-                        role="progressbar"
-                        style="width: 15%"
-                        aria-valuenow="5"
-                        aria-valuemax="100"
-                      ></div>
-                    </div>
-                  </td>
-                  <td>15 %</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
-      </div>
     </div>
   </div>
 </section>
+<script src="{%static 'js/reviews.js' %}"></script>

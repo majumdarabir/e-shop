@@ -9,6 +9,7 @@ class SearchForm(forms.Form):
         widgets = {
             'search': forms.TextInput(
                 attrs={
+                    'type': 'text',
                     'placeholder': 'Enter products',
                     'class': 'form-control'
                 }
@@ -21,9 +22,19 @@ class ReviewForms(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('review', 'ratings')
-        help_texts = {
-            'comment': 'Add your commnet',
+        widgets = {
+            'review': forms.TextInput(attrs={
+                'placeholder': 'Enter your review',
+                'type': 'text',
+                'class': 'form-control',
+                'data-mdb-showcounter': True,
+                'maxlength': 50
+            }),
+            'ratings': forms.TextInput(attrs={
+                'type': 'range',
+                'class': 'form-range', 'min': 0, 'max': 5, "data-mdb-showcounter": True, " maxlength": 20
+            })
         }
         labels = {
-            'comment': None
+            'review': 'Add your Review'
         }
