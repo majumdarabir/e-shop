@@ -1,0 +1,36 @@
+ {%load stars_tags %}
+<article class="card">
+  <div class="card-body">
+    <div class="mt-3">
+      <b class="label-rating text-lg">
+        {%if item.review_set.count%} {{item.review_set.all|avg_ratings}} out of 5.0
+        {%endif%}
+      </b>
+    </div>
+    <p class="mt-1 text-muted">{{item.review_set.count}} reviews</p>
+    <table class="table table-borderless table-sm">
+      <tbody>
+        {%if item.review_set.all %}
+        {%for star,percentage in item.review_set.all|get_ratings %} {%if percentage%}
+        <tr valign="left">
+          <td width="100">{{star}} <i class="fa-solid fa-star px-1"></i></td>
+          <td>
+            <div class="progress rounded" style="height: 18px">
+              <div
+                class="progress-bar rounded"
+                role="progressbar"
+                style="width:{{percentage}}%"
+                aria-valuenow="{{percentage}}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                {{percentage}} %
+              </div>
+            </div>
+          </td>
+        </tr>
+        {%endif%} {%endfor%} {%else%} No recordes found {%endif%}
+      </tbody>
+    </table>
+  </div>
+</article>

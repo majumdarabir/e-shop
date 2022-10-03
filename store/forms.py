@@ -21,7 +21,7 @@ class ReviewForms(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ('review', 'ratings')
+        fields = ('review', 'ratings', 'user', 'product')
         widgets = {
             'review': forms.TextInput(attrs={
                 'placeholder': 'Enter your review',
@@ -30,10 +30,11 @@ class ReviewForms(forms.ModelForm):
                 'data-mdb-showcounter': True,
                 'maxlength': 50
             }),
-            'ratings': forms.TextInput(attrs={
-                'type': 'range',
-                'class': 'form-range', 'min': 0, 'max': 5, "data-mdb-showcounter": True, " maxlength": 20
-            })
+            'ratings': forms.NumberInput(attrs={
+                'class': 'form-control', 'min': 0, 'max': 5
+            }),
+            'user': forms.TextInput(attrs={'type': 'hidden'}),
+            'product': forms.TextInput(attrs={'type': 'hidden'})
         }
         labels = {
             'review': 'Add your Review'

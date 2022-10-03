@@ -1,4 +1,4 @@
-{% load crispy_forms_tags %} {%load static %} {%load stars_tags %}
+{% load crispy_forms_tags %} {%load static %} {%load stars_tags %} {% load queryset_helpers%}
 <section class="py-2">
   <div class="container">
     <div class="row">
@@ -12,121 +12,105 @@
               >
             </h6>
             <hr />
-            {% for review in item.review_set.all%}
-            <blockquote class="border-bottom">
-              <div class="float-lg-end d-flex mb-3">
-                <div class="btn-group shadow-0" role="group">
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary"
-                    data-mdb-color="dark"
-                    onclick="likeReview()"
-                  >
-                    <i class="fa-regular fa-thumbs-up">
-                      <span class="badge rounded-pill badge-info"
-                        >{{review.liked_by.count}}</span
-                      >
-                    </i>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-outline-secondary"
-                    data-mdb-color="dark"
-                    onclick="unlikeReview()"
-                  >
-                    <i class="fa-regular fa-thumbs-down">
-                      <span class="badge rounded-pill badge-info"
-                        >{{review.unliked_by.count}}</span
-                      >
-                    </i>
-                  </button>
+            {%if item.review_set.count %}
+              {% for review in item.review_set.all%}
+              <blockquote class="border-bottom">
+                <div class="float-lg-end d-flex mb-3">
+                  <div class="btn-group shadow-0" role="group">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-mdb-color="dark"
+                      onclick="likeReview({review:'{{review.pk}}'})"
+                    >
+                      {%if review.unliked_by|liked:user.customer %}
+                        <i class="fa-solid fa-thumbs-up" id="{{review.id}}-like-button">
+                          <span class="badge rounded-pill badge-info" id="{{review.id}}-like-count"
+                            >{{review.liked_by.count}}</span
+                          >
+                        </i>
+                      {%else%}
+                        <i class="fa-regular fa-thumbs-up" id="{{review.id}}-like-button">
+                          <span class="badge rounded-pill badge-info" id="{{review.id}}-like-count"
+                            >{{review.unliked_by.count}}</span
+                          >
+                        </i>
+                      {%endif%}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-mdb-color="dark"
+                      onclick="unlikeReview({review:'{{review.pk}}'})"
+                    >
+                     {%if review.liked_by|liked:user.customer %}
+                        <i class="fa-solid fa-thumbs-up" id="{{review.id}}-unlike-button">
+                          <span class="badge rounded-pill badge-info" id="{{review.id}}-unlike-count"
+                            >{{review.liked_by.count}}</span
+                          >
+                        </i>
+                      {%else%}
+                        <i class="fa-regular fa-thumbs-up" id="{{review.id}}-unlike-button">
+                          <span class="badge rounded-pill badge-info" id="{{review.id}}-unlike-count"
+                            >{{review.liked_by.count}}</span
+                          >
+                        </i>
+                      {%endif%}
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div class="icontext">
-                <div class="d-flex align-items-center">
-                  <img
-                    src="/media/{{review.user.image}}"
-                    alt="{{review.user.image}}"
-                    style="width: 45px; height: 45px"
-                    class="rounded-circle"
-                  />
-                  <p class="ms-3 fw-bold mb-1 text-capitalize">
-                    {{review.user}}
-                  </p>
+                <div class="icontext">
+                  <div class="d-flex align-items-center">
+                    <img
+                      src="/media/{{review.user.image}}"
+                      alt="{{review.user.image}}"
+                      style="width: 45px; height: 45px"
+                      class="rounded-circle"
+                    />
+                    <p class="ms-3 fw-bold mb-1 text-capitalize">
+                      {{review.user}}
+                    </p>
+                  </div>
+                  <div class="rating-wrap">
+                    {%for r in '12345'%} {%if review.ratings|check_star:r%}
+                    <i class="fa-solid fa-star"></i>
+                    {%else%}
+                    <i class="fa-regular fa-star"></i>
+                    {%endif%} {%endfor%}
+                    <b class="dot"></b>
+                    <small class="label-rating text-muted">
+                      {{review.reviewed_at}}
+                    </small>
+                  </div>
                 </div>
-                <div class="rating-wrap">
-                  {%for r in '12345'%} {%if review.ratings|check_star:r%}
-                  <i class="fa-solid fa-star"></i>
-                  {%else%}
-                  <i class="fa-regular fa-star"></i>
-                  {%endif%} {%endfor%}
-                  <b class="dot"></b>
-                  <small class="label-rating text-muted">
-                    {{review.reviewed_at}}
-                  </small>
-                </div>
-              </div>
 
-              <div class="mt-3">
-                <p>{{review.review|title}}</p>
-              </div>
-            </blockquote>
-            {%endfor%}
+                <div class="mt-3">
+                  <p>{{review.review|title}}</p>
+                </div>
+              </blockquote>
+              {%endfor%}
+            {%else%}
+              <img
+                class="img-fluid rounded mx-auto d-block"
+                src="{% static 'images/feedback.png'%}"
+                alt="Image2"
+              />
+              <p class="lead">No Reviews yet</p>
+            {%endif%}
           </div>
         </div>
       </div>
 
       <div class="col-lg-4">
-        <article class="card">
-          <div class="card-body">
-            <div class="mt-3">
-          
-              <b class="label-rating text-lg">
-                {%if item.review_set.count%}
-                {{item.review_set.all|avg_ratings}} out of 5
-                {%endif%}
-              </b>
-            </div>
-            <p class="mt-1 text-muted">{{item.review_set.count}} reviews</p>
-            <table class="table table-borderless table-sm">
-              <tbody>
-                {%if item.review_set.all %}
-                {%for star,percentage in item.review_set.all|get_ratings %} 
-                {%if percentage%}
-                <tr valign="left">
-                  <td width="100">
-                    {{star}} <i class="fa-solid fa-star px-1"></i>
-                  </td>
-                  <td>
-                    <div class="progress rounded" style="height: 18px">
-                      <div
-                        class="progress-bar rounded"
-                        role="progressbar"
-                        style="width:{{percentage}}%"
-                        aria-valuenow="{{percentage}}"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      >
-                        {{percentage}} %
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                {%endif%} {%endfor%}
-                {%else%}
-                No recordes found
-                {%endif%}
-              </tbody>
-            </table>
-          </div>
-        </article>
+        {% include './ratings.html' %}
         <div class="card mt-4">
           <div class="card-body">
             <h5 class="card-title">Add a Review</h5>
+            {%include 'components/messages.html'%}
             <form action="{%url 'add-commnet' item.id %}" method="post">
-              {% csrf_token %} {{review_form|crispy}}
+              {% csrf_token %} {{review_form}}
               <button
-                class="btn btn-primary w-100"
+                class="btn btn-primary w-100 mt-3"
                 type="submit"
                 data-mdb-ripple-color="dark"
               >

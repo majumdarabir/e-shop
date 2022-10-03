@@ -36,5 +36,5 @@ def review_ratings(reviews):
 
 
 @register.simple_tag(name="stars")
-def stars():
+def stars(*args, **kwags):
     return [1, 2, 3, 4, 5]
