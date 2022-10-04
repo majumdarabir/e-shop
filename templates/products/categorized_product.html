@@ -5,20 +5,14 @@
   <div class="col-lg-3 col-md-4">
     <div class="card-body px-0">
       <div class="accordion accordion-borderless" id="accordionFlushExampleX">
-        {%include './categories_picker.html' %} 
         {%include './price_filter.html'%}
       </div>
     </div>
   </div>
-
   <div class="col-lg-9 col-md-8">
     <div class="row pb-2">
       <h4 class="text-uppercase mb-3 col-12" style="text-align: center">
-        {%if current_category %}
-        {{current_category}}
-        {%else%}
-        All products
-        {%endif%}
+        {{category}}
       </h4>
       {%if products.count%} 
       {% for product in products%}
