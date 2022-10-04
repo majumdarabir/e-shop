@@ -1,10 +1,11 @@
+from itertools import product
 from django.http import HttpRequest, HttpResponse
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SearchForm, ReviewForms
-from .models import Item, Review
+from .models import Favourite, Item, Review
 from products.models import Category
 
 
@@ -43,26 +44,71 @@ def add_review_to_product(request: HttpRequest, item_id: int) -> HttpResponse:
 
 @login_required
 def like_review(request: HttpRequest, review_id: int):
-    liked_by = Review.objects.get(pk=review_id).liked_by
-    is_already_liked = liked_by.contains(request.user.customer)
-    if not is_already_liked:
-        liked_by.add(request.user.customer)
-        return JsonResponse({"like_count": liked_by.count()})
+    review = Review.objects.get(pk=review_id)
+    is_liked = review.liked_by.contains(request.user.customer)
+    is_unliked = review.unliked_by.contains(request.user.customer)
+    if is_unliked:
+        review.liked_by.add(request.user.customer)
+        review.unliked_by.remove(request.user.customer)
+        return JsonResponse(
+            {"like_class": "fa-solid fa-thumbs-up", 'unlike_class': "fa-regular fa-thumbs-down",
+                "un_like_count": review.unliked_by.count(), "like_count": review.liked_by.count()}
+        )
+    if not is_liked:
+        review.liked_by.add(request.user.customer)
+        return JsonResponse(
+            {"like_class": "fa-solid fa-thumbs-up",
+             "un_like_count": review.unliked_by.count(), "like_count": review.liked_by.count()}
+        )
     else:
-        return JsonResponse({"detail": "Already liked by the user"}, status=400)
+        review.liked_by.remove(request.user.customer)
+        return JsonResponse(
+            {"like_class": "fa-regular fa-thumbs-up",
+             "un_like_count": review.unliked_by.count(), "like_count": review.liked_by.count()}
+        )
 
 
 @login_required
-def unlike_review(request: HttpRequest, review_id):
-    unliked_by = Review.objects.get(pk=review_id).unliked_by
-    is_already_unliked = unliked_by.contains(request.user.customer)
-    if not is_already_unliked:
-        unliked_by.add(request.user.customer)
-        return JsonResponse({"un_like_count": unliked_by.count()})
+def favourite_item(request: HttpRequest, item_id: int):
+    item = Item.objects.get(pk=item_id)
+    favourite_exists = Favourite.objects.filter(
+        product=item, user=request.user.customer).first()
+    if favourite_exists:
+        favourite_exists.is_favourite = not favourite_exists.is_favourite
+        favourite_exists.save()
+        return JsonResponse({"fav-class": "btn btn-secondary btn-icon" if favourite_exists.is_favourite else "btn btn-light btn-icon"})
     else:
-        return JsonResponse({"detail": "Already unliked by the user"}, status=400)
+        Favourite.objects.create(
+            product=item, user=request.user.customer, is_favourite=True)
+        return JsonResponse({"fav-class": "btn btn-secondary btn-icon"})
 
 
 @login_required
-def bookmark_a_product(request: HttpRequest) -> HttpResponse:
-    return redirect("bookmark")
+def wishlist_item(request: HttpRequest, item_id: int):
+    pass
+
+
+@login_required
+def unlike_review(request: HttpRequest, review_id: int):
+    review = Review.objects.get(pk=review_id)
+    is_liked = review.liked_by.contains(request.user.customer)
+    is_unliked = review.unliked_by.contains(request.user.customer)
+    if is_liked:
+        review.liked_by.remove(request.user.customer)
+        review.unliked_by.add(request.user.customer)
+        return JsonResponse(
+            {"like_class": "fa-regular fa-thumbs-up", 'unlike_class': "fa-solid fa-thumbs-down",
+                "un_like_count": review.unliked_by.count(), "like_count": review.liked_by.count()}
+        )
+    if not is_unliked:
+        review.unliked_by.add(request.user.customer)
+        return JsonResponse(
+            {'unlike_class': "fa-solid fa-thumbs-down",
+             "un_like_count": review.unliked_by.count(), "like_count": review.liked_by.count()}
+        )
+    else:
+        review.unliked_by.remove(request.user.customer)
+        return JsonResponse(
+            {'unlike_class': "fa-regular fa-thumbs-down",
+             "un_like_count": review.unliked_by.count(), "like_count": review.liked_by.count()}
+        )

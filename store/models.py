@@ -29,27 +29,27 @@ class Review(models.Model):
         return f"{self.user}:{self.review}"
 
 
-class BookMark(models.Model):
+class WishList(models.Model):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    is_bookmarked = models.BooleanField(default=False, null=False)
-    bookmarked_at = models.DateTimeField(auto_now=True)
+    is_wishlisted = models.BooleanField(default=False, null=False)
+    wishlisted_at = models.DateTimeField(auto_now=True)
     product = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = 'bookmarked_at',
+        ordering = 'wishlisted_at',
 
     def __str__(self) -> str:
         return f"{self.user}"
 
 
-class Like(models.Model):
+class Favourite(models.Model):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    is_liked = models.BooleanField(default=False)
-    liked_at = models.DateTimeField(auto_now=True)
+    is_favourite = models.BooleanField(default=False)
+    favourite_at = models.DateTimeField(auto_now=True)
     product = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = '-liked_at',
+        ordering = '-favourite_at',
 
     def __str__(self) -> str:
         return f"{self.user}"

@@ -1,6 +1,8 @@
-{% load crispy_forms_tags %} {%load static %} {%load stars_tags %} {% load queryset_helpers%}
+{% load crispy_forms_tags %} 
+{%load static %}
+{%load stars_tags %}
+{% load queryset_helpers%}
 <section class="py-2">
-  <div class="container">
     <div class="row">
       <div class="col-lg-8">
         <div class="card mb-4">
@@ -23,7 +25,7 @@
                       data-mdb-color="dark"
                       onclick="likeReview({review:'{{review.pk}}'})"
                     >
-                      {%if review.unliked_by|liked:user.customer %}
+                      {%if review.liked_by|liked:user.customer %}
                         <i class="fa-solid fa-thumbs-up" id="{{review.id}}-like-button">
                           <span class="badge rounded-pill badge-info" id="{{review.id}}-like-count"
                             >{{review.liked_by.count}}</span
@@ -32,7 +34,7 @@
                       {%else%}
                         <i class="fa-regular fa-thumbs-up" id="{{review.id}}-like-button">
                           <span class="badge rounded-pill badge-info" id="{{review.id}}-like-count"
-                            >{{review.unliked_by.count}}</span
+                            >{{review.liked_by.count}}</span
                           >
                         </i>
                       {%endif%}
@@ -43,16 +45,16 @@
                       data-mdb-color="dark"
                       onclick="unlikeReview({review:'{{review.pk}}'})"
                     >
-                     {%if review.liked_by|liked:user.customer %}
-                        <i class="fa-solid fa-thumbs-up" id="{{review.id}}-unlike-button">
+                     {%if review.unliked_by|liked:user.customer %}
+                        <i class="fa-solid fa-thumbs-down" id="{{review.id}}-unlike-button">
                           <span class="badge rounded-pill badge-info" id="{{review.id}}-unlike-count"
-                            >{{review.liked_by.count}}</span
+                            >{{review.unliked_by.count}}</span
                           >
                         </i>
                       {%else%}
-                        <i class="fa-regular fa-thumbs-up" id="{{review.id}}-unlike-button">
+                        <i class="fa-regular fa-thumbs-down" id="{{review.id}}-unlike-button">
                           <span class="badge rounded-pill badge-info" id="{{review.id}}-unlike-count"
-                            >{{review.liked_by.count}}</span
+                            >{{review.unliked_by.count}}</span
                           >
                         </i>
                       {%endif%}
@@ -121,6 +123,5 @@
         </div>
       </div>
     </div>
-  </div>
 </section>
 <script src="{%static 'js/reviews.js' %}"></script>

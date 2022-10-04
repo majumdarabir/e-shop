@@ -13,6 +13,8 @@ register.filter(name='check_star',
 def average_ratings(reviews):
     if not isinstance(reviews, QuerySet[Review]):
         return 0
+    if not reviews.count():
+        return 0
     avg = sum([review.ratings for review in reviews])/reviews.count()
     return round(avg, 1)
 
@@ -27,6 +29,8 @@ def review_ratings(reviews):
     counter = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0}
     if not isinstance(reviews, QuerySet[Review]):
         return {}.items()
+    if not reviews.count():
+        return 0
     for review in reviews:
         if review.ratings:
             counter[review.ratings] += 1
