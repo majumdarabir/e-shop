@@ -37,8 +37,3 @@ def review_ratings(reviews):
     for key in counter.keys():
         counter[key] = round(counter[key] / reviews.count()*100, 2)
     return counter.items()
-
-
-@register.simple_tag(name="stars")
-def stars(*args, **kwags):
-    return [1, 2, 3, 4, 5]

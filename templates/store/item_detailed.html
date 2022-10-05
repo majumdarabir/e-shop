@@ -1,4 +1,9 @@
-{%extends 'base.html'%} {% block title%} Django-medic-shop{%endblock%} {%block content%}
+{% extends 'base.html'%}
+{% load stars_tags %} 
+{% load queryset_helpers %}
+{% load static %} 
+{% block title%} Django-medic-shop{%endblock%}
+{% block content%}
 <div class="container">
   <section class="padding-y my-4">
     <div class="container">
@@ -7,73 +12,110 @@
           <article>
             <a
               href="/media/{{item.product.image}}"
-              class="img-big-wrap img-thumbnail"
+              class="img-big-wrap img-thumbnail bg-light"
             >
               <img
-                height="400"
+                height="90%"
+                width="90%"
+                style="object-fit: cover"
                 src="/media/{{item.product.image}}"
                 class="mix-blend-multiply"
               />
             </a>
           </article>
         </aside>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <article class="ps-lg-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <h4 class="title text-dark">{{item.product.name}}</h4>
-              <button
-                type="button"
-                class="btn btn-tertiary"
-                data-mdb-ripple-color="light"
-              >
-                <i class="fa-solid fa-bookmark fa-2x"></i>
-              </button>
-            </div>
+            <h4 class="title text-dark" style="font-weight: 800">
+              {{item.product.name}}
+            </h4>
 
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                {%for r in '12345'%} 
+                {%if item.review_set.all|avg_ratings|check_star:r%}
+                <i class="fa-solid fa-star"></i>
+                {%else%}
+                <i class="fa-regular fa-star"></i>
+                {%endif%} {%endfor%}
+                <b class="text-primary"
+                  >{{item.review_set.all|avg_ratings}} stars</b
+                >
+              </div>
+              <div>
+                <i class="fa-solid fa-check-square"></i>
+                <b class="text-primary">Review</b>
+                <span class="badge rounded-pill badge-info"
+                  >{{item.review_set.count}}</span
+                >
+              </div>
+              <div>
+                <i class="fa-solid fa-heart"></i>
+                <b class="text-primary">Favourite</b>
+                <span class="badge rounded-pill badge-info"
+                  >{{item.favorite_users.count}}</span
+                >
+              </div>
+            </div>
             <hr />
             <ul class="list-check cols-two mb-4">
               {%for tag in item.product.tag.all%}
-              <i class="fa-solid fa-check"></i>
+              <i class="fa-solid fa-check" style="color: green"></i>
               {{tag}}<br />
               {%endfor%}
             </ul>
             <div class="mb-4">
               <var class="price h5">MRP {{item.product.price}}</var>
-              <span>/ 1 box, incl VAT </span>
             </div>
-
             <div class="row gx-2 mb-4">
-              <div class="col-6">
+              <div class="col-2">
                 <select class="form-select">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                  {% for i in '12345'%}
+                  <option>{{i}}</option>
+                  {%endfor%}
                 </select>
               </div>
-              <div class="col-6">
+
+              <div class="col-auto">
                 <a href="#" class="btn btn-primary w-100">
                   <i class="me-2 fa fa-shopping-basket"></i> Add to cart
                 </a>
               </div>
+              <div class="col">
+                {%if item.favorite_users.all|liked:user.customer%}
+                  <button
+                    class="btn btn-secondary btn-icon"
+                    onclick="addToFavourite({item:'{{item.pk}}'})"
+                    id="{{item.pk}}-favourite"
+                  >
+                    <i class="fa-solid fa-heart" id="{{item.pk}}-favorite-icon"></i>
+                  </button>
+                {%else%}
+                  <button
+                    class="btn btn-light btn-icon"
+                    onclick="addToFavourite({item:'{{item.pk}}'})"
+                    id="{{item.pk}}-favourite"
+                  >
+                  <i class="fa-regular fa-heart" id="{{item.pk}}-favorite-icon"></i></button>
+                {%endif%}
+              </div>
             </div>
-
             <label class="form-check">
-              <input class="form-check-input" type="checkbox" value="" />
-              <span class="form-check-label">Add to wishlist</span>
+              <input 
+                class="form-check-input"  
+                type="checkbox" 
+                id="{{item.pk}}-is-wishlist"
+                {%if item.wishlist_users.all|liked:user.customer%} checked {%endif%}
+                onchange="addToWishList({item:'{{item.pk}}'})"
+              />
+              <span class="form-check-label"> Add to wishlist</span>
             </label>
           </article>
         </div>
       </div>
     </div>
   </section>
-  {%include './item_info.html' %}
-  <h6
-    class="bg-light p-2 border-top border-bottom d-flex justify-content-between"
-  >
-    <span class="small-text p-0">Likes</span>
-    <span class="badge rounded-pill badge-info">{{item.likes.all|length}}</span>
-  </h6>
-
-  {%include './reviews.html' %}
+  <script src="{%static 'js/item_detailed.js' %}"></script>
+  {%include './item_info.html' %} {%include './reviews.html' %}
 </div>
 {%include 'components/footer.html'%} {%endblock%}

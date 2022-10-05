@@ -1,11 +1,10 @@
-from itertools import product
 from django.http import HttpRequest, HttpResponse
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SearchForm, ReviewForms
-from .models import Favourite, Item, Review
+from .models import Item, Review
 from products.models import Category
 
 
@@ -71,21 +70,25 @@ def like_review(request: HttpRequest, review_id: int):
 @login_required
 def favourite_item(request: HttpRequest, item_id: int):
     item = Item.objects.get(pk=item_id)
-    favourite_exists = Favourite.objects.filter(
-        product=item, user=request.user.customer).first()
-    if favourite_exists:
-        favourite_exists.is_favourite = not favourite_exists.is_favourite
-        favourite_exists.save()
-        return JsonResponse({"fav-class": "btn btn-secondary btn-icon" if favourite_exists.is_favourite else "btn btn-light btn-icon"})
+    is_userfavorite = item.favorite_users.contains(request.user.customer)
+    if is_userfavorite:
+        item.favorite_users.remove(request.user.customer)
+        return JsonResponse({"fav_class": "btn btn-light btn-icon", "icon_class": "fa-regular fa-heart"})
     else:
-        Favourite.objects.create(
-            product=item, user=request.user.customer, is_favourite=True)
-        return JsonResponse({"fav-class": "btn btn-secondary btn-icon"})
+        item.favorite_users.add(request.user.customer)
+        return JsonResponse({"fav_class": "btn btn-secondary btn-icon", "icon_class": "fa-solid fa-heart"})
 
 
 @login_required
 def wishlist_item(request: HttpRequest, item_id: int):
-    pass
+    item = Item.objects.get(pk=item_id)
+    is_wishlisted = item.wishlist_users.contains(request.user.customer)
+    if is_wishlisted:
+        item.wishlist_users.remove(request.user.customer)
+        return JsonResponse({"is_wishlist": False})
+    else:
+        item.wishlist_users.add(request.user.customer)
+        return JsonResponse({"is_wishlist": True})
 
 
 @login_required
