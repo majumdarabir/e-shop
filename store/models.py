@@ -7,9 +7,9 @@ from .validators import check_valid_ratings
 class Item(models.Model):
     product = models.OneToOneField(Product, on_delete=models.CASCADE)
     favorite_users = models.ManyToManyField(
-        Customer, related_name="item_favorite_users", blank=True)
+        Customer, related_name="item_favorite", blank=True)
     wishlist_users = models.ManyToManyField(
-        Customer, related_name="item_wishlist_users", blank=True)
+        Customer, related_name="item_wishlist", blank=True)
 
     def __str__(self) -> str:
         return f"{self.product}"

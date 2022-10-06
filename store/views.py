@@ -115,3 +115,13 @@ def unlike_review(request: HttpRequest, review_id: int):
             {'unlike_class': "fa-regular fa-thumbs-down",
              "un_like_count": review.unliked_by.count(), "like_count": review.liked_by.count()}
         )
+
+
+def user_favourites(request: HttpRequest) -> HttpResponse:
+    items = request.user.customer.item_favorite.all()
+    return render(request, 'store/favourites.html', {"items": items})
+
+
+def user_wishlist(request: HttpRequest) -> HttpResponse:
+    items = request.user.customer.item_wishlist.all()
+    return render(request, "store/wishlist.html", {"items": items})
