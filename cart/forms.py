@@ -1,14 +1,30 @@
-from typing import Optional, Any
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db.models.query import QuerySet
 
 from base.models import Customer
-from .models import Cart, OrderedItem
-from .choices import ItemCountChoices
+from .models import Cart, Coupon, OrderedItem
 
 
-class AddToCartForms(forms.Form):
-    item_count = forms.ChoiceField(choices=ItemCountChoices.choices)
+class CouponForm(forms.Form):
+    code = forms.CharField(max_length=50, widget=forms.TextInput(
+        attrs={"type": "text",
+                       "class": "form-control",
+                       "placeholder": "Coupon code"
+               }
+    ), label="", required=True)
+
+
+class CouponAdminForm(forms.ModelForm):
+    class Meta:
+        model = Coupon
+        # fields = 'code', 'short_description', 'valid_till', 'discount_amount'
+        fields = '__all__'
+
+
+class OrderItemForm(forms.ModelForm):
+    class Meta:
+        fields = 'item_count', 'item'
 
 
 class CartForm(forms.ModelForm):
@@ -17,14 +33,15 @@ class CartForm(forms.ModelForm):
         model = Cart
         fields = '__all__'
 
-    def clean(self) -> Optional[dict[str, Any]]:
+    def clean(self):
         errors: list[ValidationError] = []
         user: Customer = self.cleaned_data['user']
-        items: list[OrderedItem] = self.cleaned_data['items']
-        for item in items:
-            if item.user != user:
-                errors.append(f"{user} can't have this items  of {item.user}")
-                break
+        items: QuerySet[OrderedItem] = self.cleaned_data['items']
+        coupons: QuerySet[Coupon] = self.cleaned_data['coupons']
+        if not items.filter(user=user):
+            errors.append(f"{user} can't have this items  of")
+        if coupons.filter(user=user):
+            errors.append("Code already used by the user")
         if errors:
             raise ValidationError(*errors)
         return super().clean()
