@@ -1,0 +1,43 @@
+<div class="row my-4">
+  <div class="card">
+    <article class="card-body">
+      <h4 class="card-title">Review cart</h4>
+      <div class="row">
+        {% for order_item in cart.items.all%}
+        <div class="col-md-4">
+          <div class="itemside mb-4">
+            <div class="aside">
+              <img
+                src="/media/{{order_item.item.product.image}}"
+                class="img-sm border rounded img-thumbnail"
+                style="height: 100px" />
+            </div>
+            <div class="info">
+              <p>{{order_item.product}}</p>
+              <span class="text-muted"
+                >{{order_item.item_count}} x MRP {{order_item.product.price}}
+              </span>
+              <br />
+              <strong class="price"> MRP <span id="{{order_item.item.pk}}-total-price-review">{{order_item.total_price}}</span></strong>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </article>
+    <article class="card-body border-top">
+      <table style="max-width: 360px" class="table table-sm float-lg-end">
+        <tbody>
+          <tr>
+            <td>Number of Items</td>
+            <td>{{cart.items.count}} items</td>
+          </tr>
+          <tr>
+            <td>Total:</td>
+            <td><strong class="h5">MRP {{cart.total_price}}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </div>
+</div>
