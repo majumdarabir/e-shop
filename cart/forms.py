@@ -37,11 +37,8 @@ class CartForm(forms.ModelForm):
         errors: list[ValidationError] = []
         user: Customer = self.cleaned_data['user']
         items: QuerySet[OrderedItem] = self.cleaned_data['items']
-        coupons: QuerySet[Coupon] = self.cleaned_data['coupons']
-        if not items.filter(user=user):
-            errors.append(f"{user} can't have this items  of")
-        if coupons.filter(user=user):
-            errors.append("Code already used by the user")
+        if items.filter(user=user):
+            errors.append(f"{user} can't have this items")
         if errors:
             raise ValidationError(*errors)
         return super().clean()

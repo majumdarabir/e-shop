@@ -5,6 +5,9 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from cart.validators import item_count_ge_zero
+from store.models import Item
+
 from .models import Cart, Coupon, OrderedItem
 from .forms import CouponForm
 
@@ -38,6 +41,26 @@ def refresh_item_count(request: HttpRequest, item: int) -> HttpResponse:
     order_item.update(item_count=item_count)
     messages.success(
         request, message=f"Ordereing {order_item.first().item_count}x{order_item.first().item} ")
+    return redirect("cart")
+
+
+@login_required
+def add_item_to_cart(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        item = request.POST.get("item_id" or None)
+        item_count = request.POST.get("item_count" or 1)
+        cart = Cart.objects.get(user__user=request.user)
+        order_item_exits = OrderedItem.objects.filter(
+            item__id=item, user__user=request.user).first()
+        if order_item_exits:
+            messages.warning(
+                request, f"{order_item_exits.item} is already in the cart.Ypu may increase or decrease qualities form here")
+        else:
+            item_model = Item.objects.get(pk=item)
+            order = OrderedItem.objects.create(
+                item=item_model, user=request.user.customer, item_count=item_count)
+            cart.items.add(order)
+            messages.success(request, f"{order.item} added to cart")
     return redirect("cart")
 
 
@@ -76,5 +99,6 @@ def remove_item_from_cart(request: HttpRequest, item_id: int) -> HTTPResponse:
         messages.warning(request, "Item don't belong to the cart")
         return redirect("cart")
     cart.items.remove(item)
+    item.delete()
     messages.success(request, f"Removed {item.product} from your cart")
     return redirect("cart")

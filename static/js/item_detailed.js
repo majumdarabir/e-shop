@@ -38,16 +38,19 @@ const addToWishList = async ({ item }) => {
 
 const increaseItemCount = ({ item }) => {
   const itemCountField = document.getElementById(`${item}-item-counter`);
-
+  const itemCountFieldForm = document.getElementById(`${item}-counter-value`);
   const count = parseInt(itemCountField.value);
   if (count < 5) {
     itemCountField.value = count + 1;
+    itemCountFieldForm.value = itemCountField.value;
   }
 };
 const decreaseItemCount = ({ item }) => {
   const itemCountField = document.getElementById(`${item}-item-counter`);
+  const itemCountFieldForm = document.getElementById(`${item}-counter-value`);
   const count = parseInt(itemCountField.value);
   if (count > 1) {
     itemCountField.value = count - 1;
+    itemCountFieldForm.value = itemCountField.value;
   }
 };
