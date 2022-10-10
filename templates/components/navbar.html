@@ -92,14 +92,11 @@
             />
             <strong class="d-none d-sm-block ms-1">{{user.customer}}</strong>
           </a>
-
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
               <a
                 class="dropdown-item"
-                href="#"
-                data-mdb-toggle="modal"
-                data-mdb-target="#profileModal"
+                href="{% url 'profile'%}"
                 >My profile</a
               >
             </li>
@@ -112,4 +109,4 @@
     </div>
   </div>
 </nav>
-{% include 'base/profile.html'%}
+
