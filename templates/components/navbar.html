@@ -6,8 +6,7 @@
         height="16"
       />
     </a>
-    <!-- <p class="text-uppercase navbar-brand">dj-medic-shop</p> -->
-    <button
+        <button
       class="navbar-toggler"
       type="button"
       data-mdb-toggle="collapse"
@@ -74,8 +73,7 @@
             >
           </a>
         </li>
-        <!-- Avatar -->
-        <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
           <a
             class="nav-link d-sm-flex align-items-sm-center"
             href="#"
@@ -84,13 +82,18 @@
             aria-expanded="false"
           >
             <img
-              src="/media/{{user.customer.image}}"
+              src="{{user.customer.image.url}}"
               class="rounded-circle"
-              height="22"
-              alt="Black and White Portrait of a Man"
-              loading="lazy"
+              style="height:32px; width:32px"
+              alt="Navbar profile image"
             />
-            <strong class="d-none d-sm-block ms-1">{{user.customer}}</strong>
+            <strong class="d-none d-sm-block ms-1">
+              {%if user.customer.first_name %}
+                {{user.customer.first_name}}
+              {%else%}
+                {{user.customer}}
+              {%endif%}
+            </strong>
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>

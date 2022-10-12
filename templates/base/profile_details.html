@@ -1,74 +1,75 @@
-{%extends 'base.html'%} {% load crispy_forms_tags%} 
-{%block title%}Profile{%endblock%} {%block content%}
-<article class="card">
+{%extends 'base.html'%}{% load static %} {%block title%}Profile{%endblock%}
+{%block content%}
+<article class="container card mb-3">
   <div class="card-body">
+    <h5 class="card-title">Your Profile</h5>
     <div class="row">
       <div class="col-lg-8">
-        <form method="post">
+        <form action="{%url 'profile'%}" method="post" enctype="multipart/form-data">
+          {%csrf_token%}
           <div class="row gx-3">
-            <div class="col-6 mb-3">
+            <div class="col-lg-6 col-md-12 mb-3">
               <label class="form-label">First Name</label>
               {{upgrade.first_name}}
             </div>
-            <div class="col-6 mb-3">
+            <div class="col-lg-6 col-md-12 mb-3">
               <label class="form-label">Last name</label>
               {{upgrade.last_name}}
             </div>
-            <div class="col-lg-6 col-md-6 mb-3">
+            <div class="col-lg-6 col-md-12 mb-3">
               <label class="form-label">Email</label>
               {{upgrade.email}}
             </div>
-            <div class="col-lg-6 col-md-6 mb-3">
+            <div class="col-lg-6 col-md-12 mb-3">
               <label class="form-label">Phone</label>
               {{upgrade.phone_number}}
             </div>
-            <div class="col-lg-12 mb-3">
+            <div class="col-lg-12 col-md-12 mb-3">
               <label class="form-label">Address</label>
               {{upgrade.address}}
             </div>
-            <div class="col-lg-6 col-6 mb-3">
+            <div class="col-lg-6 col-md-12 col-6">
               <label class="form-label">Birthday</label>
               {{upgrade.date_of_birth}}
-              {{upgrade.date_of_birth.help_text}}
+              <p class="small text-muted">
+
+                {{upgrade.date_of_birth.help_text}}
+              </p> 
             </div>
-          </div>
+            <div class="col-lg-6 col-md-12 mb-3">
+               <label class="form-label">Image</label>
+              {{upgrade.image}}</div>
+          </div> 
           <button class="btn btn-primary" type="submit">Save changes</button>
         </form>
       </div>
       <aside class="col-lg-4">
         <div class="text-lg-center mt-3">
-          <img
-            class="img-lg mb-3 img-avatar"
-            src="/media/{{user.customer.image}}"
-            id="profile-image"
-            style="height: 100px; width: 100px"
-            alt="User Photo" />
-            <div class="row p-1 g-3">
-              <div class="col-12">
-                {{upgrade.image}}  
-              </div>
-              <div class="col-6">
-                 <button class="btn btn-sm btn-outline-danger w-100" href="#">
-                  <i class="fa fa-trash"></i>
-                  Remove
-                 </button>
-              </div>
-              <div class="col-6">
-                <button class="btn btn-sm btn-outline-danger w-100" href="#">
-                  <i class="fa fa-trash"></i>
-                  Remove
-                </button>
-              </div>
+          <div class="d-flex flex-column mb-3 align-items-center">
+            <a href="{{user.customer.image.url}}">
+              <img
+                src="{{user.customer.image.url}}"
+                alt="Avatar"
+                class="rounded mb-2 img-thumbnail"
+                style="width: 120px; height: 120px" />
+            </a>
+            <h5>Welcome  {%if user.customer.first_name %}
+                {{user.customer.first_name|title}}
+              {%else%}
+                {{user.customer|title}}
+              {%endif%}</h5>
+            <p class="small text-muted">Sorry you can't change your username</p>
           </div>
         </div>
       </aside>
     </div>
     <br />
-
     <hr class="my-4" />
     <div class="row" style="max-width: 920px">
       <div class="col-md col-lg-6">
-        <article class="box mb-3 bg-light p-2 border rounded" style="background-color: #f8f9fa !important">
+        <article
+          class="box mb-3 bg-light p-2 border rounded"
+          style="background-color: #f8f9fa !important">
           <button
             class="btn float-end btn-outline-primary btn-sm"
             data-mdb-toggle="modal"
@@ -104,4 +105,4 @@
     </div>
   </div>
 </article>
-{%endblock%}
+{%include 'components/footer.html'%} {%endblock%}

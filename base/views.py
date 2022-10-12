@@ -1,14 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-
-from base.models import Customer
-
 
 from .forms import ChangePasswordForm, RegistrationForm, UpgradeCustomerForm
 
@@ -79,9 +75,17 @@ def change_password(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def profile(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        profile_form = UpgradeCustomerForm(
+            request.POST, request.FILES, instance=request.user.customer)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request, "Updated your profile")
+        else:
+            messages.error(request, profile_form.errors)
+        return redirect("profile")
+    change_profile_form = UpgradeCustomerForm(instance=request.user.customer)
     change_password_form = ChangePasswordForm
-    current_customer = Customer.objects.get(user=request.user)
-    change_profile_form = UpgradeCustomerForm(instance=current_customer)
     return render(request, "base/profile_details.html",
                   {"change_password": change_password_form, "upgrade": change_profile_form})
 
@@ -99,4 +103,4 @@ def delete_account(request: HttpRequest) -> HttpResponse:
 def logout_user(request: HttpRequest):
     logout(request)
     messages.success(request, "Successfully logger out ")
-    return redirect("home")
+    return redirect("login")

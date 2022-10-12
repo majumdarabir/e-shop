@@ -45,7 +45,6 @@ class UpgradeCustomerForm(forms.ModelForm):
         help_texts = {
             "date_of_birth": f"If not updated, default to 1st Jan ,{timezone.now().year-5}"
         }
-
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'placeholder': 'Type here',
@@ -53,6 +52,7 @@ class UpgradeCustomerForm(forms.ModelForm):
 
             }),
             'last_name': forms.TextInput(attrs={
+
                 'placeholder': 'Type here',
                 'class': 'form-control'
 
@@ -67,14 +67,16 @@ class UpgradeCustomerForm(forms.ModelForm):
             }), 'address': forms.Textarea(attrs={
                 'placeholder': 'Your address goes here',
                 'class': 'form-control',
-                'height': 200
+                'rows': 5
 
             }), 'date_of_birth': forms.TextInput(attrs={
                 'type': 'date',
                 'placeholder': 'Your birthdate',
                 'class': 'form-control'
 
-            }), 'image': forms.TextInput(attrs={
-                'type': 'file', 'class': 'form-control'
+            }), 'image': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': "image/x-png,image/jpeg",
+                "multiple": False
             })
         }
