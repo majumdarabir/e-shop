@@ -1,21 +1,32 @@
-{% if messages%} 
-    {% for message in messages %}
-        {% if message.tags == 'success'%}
-            <div
-            class="alert alert-success alert-dismissible fade show"
-            role="alert"
-            >
-            <strong>{{ message}}</strong>
-            <button type="button" class="btn-close alert-dismissible " data-mdb-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {%else%}
-            <div
-            class="alert alert-error alert-dismissible fade show"
-            role="alert"
-            >
-            <strong>{{ message}}</strong>
-            <button type="button" class="btn-close .alert-dismissible " data-mdb-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {%endif%} 
-    {% endfor %}
+{% if messages%}
+  {% for message in messages %} 
+    {% if message.tags == 'success'%}
+      <div
+        class="alert alert-dismissible fade show alert-success"
+        role="alert"
+        data-mdb-color="success"
+        id="customxD">
+        <strong>{{message}}</strong>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="alert"
+          aria-label="Close"></button>
+      </div>
+    {%else%}
+      <div
+        class="alert alert-dismissible fade show alert-{{message.tags}}"
+        role="alert"
+        data-mdb-color="{{message.tags}}"
+        id="customxD">
+        <strong>{{message}}</strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="alert"
+          aria-label="Close"></button>
+      </div>
+    {%endif%}
+  {% endfor %}
 {%endif%}

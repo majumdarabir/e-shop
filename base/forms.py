@@ -46,37 +46,11 @@ class UpgradeCustomerForm(forms.ModelForm):
             "date_of_birth": f"If not updated, default to 1st Jan ,{timezone.now().year-5}"
         }
         widgets = {
-            'first_name': forms.TextInput(attrs={
-                'placeholder': 'Type here',
-                'class': 'form-control'
-
-            }),
-            'last_name': forms.TextInput(attrs={
-
-                'placeholder': 'Type here',
-                'class': 'form-control'
-
-            }), 'email': forms.EmailInput(attrs={
-                'placeholder': 'example@example.com',
-                'class': 'form-control'
-
-            }), 'phone_number': forms.NumberInput(attrs={
-                'placeholder': '+0987654321',
-                'class': 'form-control'
-
-            }), 'address': forms.Textarea(attrs={
-                'placeholder': 'Your address goes here',
-                'class': 'form-control',
-                'rows': 5
-
-            }), 'date_of_birth': forms.TextInput(attrs={
-                'type': 'date',
-                'placeholder': 'Your birthdate',
-                'class': 'form-control'
-
-            }), 'image': forms.FileInput(attrs={
-                'class': 'form-control',
-                'accept': "image/x-png,image/jpeg",
-                "multiple": False
-            })
+            'first_name': forms.TextInput(attrs={'placeholder': 'Type here', 'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Type here', 'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'example@example.com', 'class': 'form-control'}),
+            'phone_number': forms.NumberInput(attrs={'placeholder': '+0987654321', 'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'placeholder': 'Your address goes here', 'class': 'form-control', 'rows': 5}),
+            'date_of_birth': forms.TextInput(attrs={'type': 'date', 'placeholder': 'Your birthdate', 'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control', 'accept': "image/x-png,image/jpeg", "multiple": False})
         }

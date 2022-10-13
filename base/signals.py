@@ -7,4 +7,5 @@ from .models import Customer
 @receiver([post_save], sender=User)
 def create_customer(sender, instance: User, created, **kwags):
     if created:
-        Customer.objects.create(user=instance, first_name=instance.username)
+        Customer.objects.create(
+            user=instance, first_name=instance.username, email=instance.email)

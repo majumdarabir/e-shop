@@ -20,10 +20,11 @@
       rel="stylesheet" />
   </head>
   <body>
-    {% if user.is_authenticated %} {%include 'components/navbar.html'%}{%endif%}
-    <div class="container my-1">
-      {%include 'components/messages.html'%}
-    </div>
+    {% if user.is_authenticated %} {%include 'components/navbar.html'%}
+      <div class="container my-1">
+        {%include 'components/messages.html'%}
+      </div>
+    {%endif%}
     {% block content %} {%endblock %} 
   </body>
   <script

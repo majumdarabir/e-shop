@@ -15,9 +15,7 @@ def register_user(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = authenticate(request, username=form.cleaned_data.get(
-                'username'), password=form.cleaned_data.get('password1'))
+            user = form.save()
             login(request, user)
             messages.success(request, 'Successfully logged in !!')
             return redirect('home')
@@ -42,10 +40,10 @@ def login_user(request: HttpRequest) -> HttpResponse:
             if user:
                 login(request, user)
                 messages.success(request, 'Logged in Successfully')
-                return redirect('home')
-            messages.warning(request, f'Some problem {user_info}')
+            else:
+                messages.warning(request, f'Some problem {user_info}')
             return redirect('login')
-        messages.error(request, form.errors)
+        messages.warning(request, form.errors)
         return redirect("login")
     form = AuthenticationForm
     return render(request, 'base/signin.html', {'form': form})
@@ -61,7 +59,6 @@ def change_password(request: HttpRequest) -> HttpResponse:
                 "old_password")
             new_password = change_password_form.cleaned_data.get(
                 "new_password")
-            print(change_password_form.cleaned_data)
             if not user.check_password(old_password):
                 messages.warning(request, f"{user} has a different password")
                 return redirect("login")
@@ -95,7 +92,7 @@ def delete_account(request: HttpRequest) -> HttpResponse:
     if request.user.delete():
         messages.success(request, "User deleted successfully")
     else:
-        messages.error(request, "Failed to delete the user")
+        messages.warning(request, "Failed to delete the user")
     return redirect("login")
 
 

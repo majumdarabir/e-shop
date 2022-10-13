@@ -21,12 +21,12 @@
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
-                <form action="{% url 'login' %}" method="POST">
-                  <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
                     Sign into your account
                   </h3>
-                  
-                  {% csrf_token %} {{form|crispy}}
+                <form action="{% url 'login' %}" method="POST">
+                  {% csrf_token %} 
+                  {{form|crispy}}
                   <div class="pt-1 mb-4">
                     <button class="btn btn-dark btn-lg btn-block" type="submit">
                       Login
