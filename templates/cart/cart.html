@@ -11,7 +11,7 @@
               <div class="me-lg-5" style="display: flex">
                 <div style="flex-shrink: 0; position: relative">
                   <img
-                    src="/media/{{order_item.item.product.image}}"
+                    src="{{order_item.item.product.image.url}}"
                     class="img-sm border rounded img-thumbnail"
                     style="height: 100px" />
                 </div>
@@ -149,7 +149,7 @@
             </dd>
           </dl>
           <div class="d-grid gap-2 my-3">
-            <a href="#" class="btn btn-primary w-100"> Proceed To order </a>
+            <a href="{% url 'checkout'%}" class="btn btn-primary w-100"> Proceed To order </a>
             <button
               onclick="history.back()"
               class="btn btn-outline-secondary w-100">

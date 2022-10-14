@@ -9,12 +9,11 @@
         <div class="col-lg-3 col-md-6 pb-4 ">
             <div class="card hover-zoom ripple">
                 <div class="bg-image">
-                    <img src="/media/{{category.image}}" class="card-image w-100" alt="{{category.image}}" />
+                    <img src="{{category.image.url}}" class="card-image w-100" alt="{{category.image}}" />
                 </div>
                 <div class="card-body">
-                    <a href="{%url 'category-detailed' category.id%}" class="stretched-link"></a>
-                    <h5 class="card-title text-muted">{{category.name}}</h5>
-                   
+                    <a href="{%url 'product-of-category' category.pk %}" class="stretched-link"></a>
+                    <h5 class="card-title text-muted">{{category.name}}</h5>    
                 </div>
                 </p>
             </div>
