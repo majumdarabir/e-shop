@@ -1,4 +1,7 @@
 /ve/
 __pycache__
 uploads/
-abc.json
+media/
+db.sqlite3
+backup/
+*.env

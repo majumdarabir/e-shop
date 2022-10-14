@@ -1,22 +1,16 @@
 from django.contrib import admin
 from django.urls import path
-from .views.home import Index, store
-from .views.signup import Signup
-from .views.login import Login, logout
-from .views.cart import Cart
-from .views.checkout import CheckOut
-from .views.orders import OrderView
-from .middlewares.auth import auth_middleware
-
+from .views import (home, item_detailed, add_review_to_product,
+                    like_review, unlike_review, favourite_item, wishlist_item, user_favourites, user_wishlist)
 
 urlpatterns = [
-    path('', Index.as_view(), name='homepage'),
-    path('store', store, name='store'),
-
-    path('signup', Signup.as_view(), name='signup'),
-    path('login', Login.as_view(), name='login'),
-    path('logout', logout, name='logout'),
-    path('cart', auth_middleware(Cart.as_view()), name='cart'),
-    path('check-out', CheckOut.as_view(), name='checkout'),
-    path('orders', auth_middleware(OrderView.as_view()), name='orders'),
+    path('', home, name='home'),
+    path('wishlist', user_wishlist, name="wishlist"),
+    path('favourite', user_favourites, name="favourites"),
+    path('item/<int:pk>', item_detailed, name="item_detailed"),
+    path('add-comment/<int:item_id>', add_review_to_product, name="add-commnet"),
+    path('like-review/<int:review_id>', like_review, name="like-review"),
+    path('unlike-review/<int:review_id>', unlike_review, name="unlike-review"),
+    path('favorite-item/<int:item_id>', favourite_item, name="favorite-item"),
+    path('wishlist-item/<int:item_id>', wishlist_item, name="wishlist-item")
 ]

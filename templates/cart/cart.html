@@ -1,0 +1,166 @@
+{%extends 'base.html'%} {%load static%} {% load queryset_helpers %} {%block title%}Cart{%endblock%} {%block content%}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title mb-4">Shopping cart</h5>
+          {% for order_item in cart.items.all%}
+          <article class="row gy-3 mb-4 align-items-center">
+            <div class="col-lg-8">
+              <div class="me-lg-5" style="display: flex">
+                <div style="flex-shrink: 0; position: relative">
+                  <img
+                    src="{{order_item.item.product.image.url}}"
+                    class="img-sm border rounded img-thumbnail"
+                    style="height: 100px" />
+                </div>
+                <div style="flex-grow: 1; padding-left: 0.75rem">
+                  <a
+                    href="{%url 'item_detailed' order_item.product.item.pk %}"
+                    class="title mb-1"
+                    >{{order_item.product.name}}</a
+                  >
+                  <p class="text-muted small">
+                    {{order_item.product.category.name}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="lh-sm float-lg-end">
+                <var class="price h6"
+                  >MRP
+                  <span id="{{order_item.item.pk}}-total-price"
+                    >{{order_item.total_price}}</span
+                  ></var
+                >
+                <br />
+                <small class="text-muted">
+                  MRP
+                  <span id="{{order_item.item.pk}}-actual-price"
+                    >{{order_item.product.price}}</span
+                  >
+                  / per item
+                </small>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="input-group input-spinner">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  onclick="updateItemPlus({item:'{{order_item.item.pk}}'})">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+                <input
+                  type="number"
+                  class="form-control"
+                  value="{{order_item.item_count}}"
+                  readonly
+                  id="{{order_item.item.pk}}-item-counter"
+                  style="text-align: center" />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  onclick="updateItemMinus({item:'{{order_item.item.pk}}'})">
+                  <i class="fa-sharp fa-solid fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="float-lg-end">
+                {%if order_item.item.favorite_users.all|liked:user.customer%}
+                <button
+                  class="btn btn-secondary btn-icon"
+                  onclick="addToFavourite({item:'{{order_item.item.pk}}'})"
+                  id="{{order_item.item.pk}}-favourite">
+                  <i
+                    class="fa-solid fa-heart"
+                    id="{{order_item.item.pk}}-favorite-icon"></i>
+                </button>
+                {%else%}
+                <button
+                  class="btn btn-light btn-icon"
+                  onclick="addToFavourite({item:'{{order_item.item.pk}}'})"
+                  id="{{order_item.item.pk}}-favourite">
+                  <i
+                    class="fa-regular fa-heart"
+                    id="{{order_item.item.pk}}-favorite-icon"></i>
+                </button>
+                {%endif%}
+                <a
+                  href="{% url 'remove_item_cart' order_item.item.pk %}"
+                  class="btn btn-outline-danger text-danger">
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+                <form action="{%url 'update-item' order_item.item.pk %}" method="post" style="display:inline-block">
+                   {% csrf_token %}
+                  <input type="hidden" name="item_id" value="{{order_item.item.pk}}">
+                  <input type="hidden" name="item_count" id="{{order_item.item.pk}}-item-counter-value" value="{{order_item.item_count}}">
+                  <button type="submit"
+                    class="btn btn-outline-secondary"
+                    id="{{order_item.item.pk}}-changes"
+                    ><i class="fa-solid fa-arrows-rotate"></i
+                  ></button>
+                </form>
+              </div>
+            </div>
+          </article>
+          <hr />
+          {%endfor%}
+        </div>
+        <div class="card-body border-top">
+          <p class="mb-0">Last updated at {{cart.updated_at}}</p>
+        </div>
+      </div>
+    </div>
+    <aside class="col-lg-3">
+      <div class="card mb-3">
+        <div class="card-body">
+          <form action="{%url 'check-code'%}" method="post">
+            {%csrf_token%}
+            <label class="form-label">Have coupon?</label>
+            <div class="input-group">
+              {{coupon_form}}
+              <button class="btn btn-outline-secondary">Apply</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <dl class="dlist-align">
+            <dt>Total price:</dt>
+            <dd class="text-end">
+              MRP <span id="cart-total">{{cart.total_price}}</span>
+            </dd>
+          </dl>
+          <dl class="dlist-align">
+            <dt>Discount:</dt>
+            <dd class="text-end text-success">- MRP {{cart.discount}}</dd>
+          </dl>
+          <hr />
+          <dl class="dlist-align">
+            <dt>Total:</dt>
+            <dd class="text-end text-dark h5">
+              MRP <span id="cart-total-final">{{cart.final_price}}</span>
+            </dd>
+          </dl>
+          <div class="d-grid gap-2 my-3">
+            <a href="{% url 'checkout'%}" class="btn btn-primary w-100"> Proceed To order </a>
+            <button
+              onclick="history.back()"
+              class="btn btn-outline-secondary w-100">
+              Back to shop
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <script src="{%static 'js/item_detailed.js' %}"></script>
+  <script src="{%static 'js/cart.js' %}"></script>
+</div>
+{%include 'components/footer.html'%} {%endblock%}

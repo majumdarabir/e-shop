@@ -1,0 +1,89 @@
+{% load search_tags %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+  <div class="container">
+    <a class="navbar-brand me-2" href="{%url 'home'%}">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/5224/5224110.png"
+        height="16" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <div class="d-flex me-auto">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'categories'%}">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'products'%}">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'orders'%}">Orders</a>
+          </li>
+        </ul>
+      </div>
+      {%search_form%}
+      <ul class="navbar-nav">
+        <li class="nav-item me-3 me-lg-1">
+          <a class="nav-link" href="{%url 'cart'%}">
+            <i class="fa-solid fa-shopping-bag"></i>
+            <span class="badge rounded-pill badge-notification bg-danger">
+              {{user.customer.cart_set.get.items.count}}</span
+            >
+          </a>
+        </li>
+        <li class="nav-item me-3 me-lg-1">
+          <a class="nav-link" href="{% url 'favourites'%}">
+            <i class="fa-solid fa-heart"></i>
+            <span class="badge rounded-pill badge-notification bg-danger"
+              >{{user.customer.item_favorite.count}}</span
+            >
+          </a>
+        </li>
+        <li class="nav-item me-3 me-lg-1">
+          <a class="nav-link" href="{% url 'wishlist'%}">
+            <i class="fa-solid fa-star"></i>
+            <span class="badge rounded-pill badge-notification bg-danger"
+              >{{user.customer.item_wishlist.count}}</span
+            >
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link d-sm-flex align-items-sm-center"
+            href="#"
+            id="dropdownMenuButton"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false">
+            <img
+              src="{{user.customer.image.url}}"
+              class="rounded-circle"
+              style="height: 32px; width: 32px"
+              alt="Navbar profile image" />
+            <strong class="d-none d-sm-block ms-1">
+              {%if user.customer.first_name %} {{user.customer.first_name}}
+              {%else%} {{user.customer}} {%endif%}
+            </strong>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+              <a class="dropdown-item" href="{% url 'profile'%}">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{%url 'logout'%}">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

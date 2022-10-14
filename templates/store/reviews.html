@@ -1,0 +1,126 @@
+{% load crispy_forms_tags %} 
+{%load static %}
+{%load stars_tags %}
+{% load queryset_helpers%}
+<section class="py-2">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h6 class="d-flex justify-content-between">
+              <span class="small-text">Reviews</span>
+              <span class="badge rounded-pill badge-info"
+                >{{item.review_set.count}}</span
+              >
+            </h6>
+            <hr />
+            {%if item.review_set.count %}
+              {% for review in item.review_set.all%}
+              <blockquote class="border-bottom">
+                <div class="float-lg-end d-flex mb-3">
+                  <div class="btn-group shadow-0" role="group">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-mdb-color="dark"
+                      onclick="likeReview({review:'{{review.pk}}'})"
+                    >
+                      {%if review.liked_by|liked:user.customer %}
+                        <i class="fa-solid fa-thumbs-up" id="{{review.id}}-like-button">
+                          <span class="badge rounded-pill badge-info" id="{{review.id}}-like-count"
+                            >{{review.liked_by.count}}</span
+                          >
+                        </i>
+                      {%else%}
+                        <i class="fa-regular fa-thumbs-up" id="{{review.id}}-like-button">
+                          <span class="badge rounded-pill badge-info" id="{{review.id}}-like-count"
+                            >{{review.liked_by.count}}</span
+                          >
+                        </i>
+                      {%endif%}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      data-mdb-color="dark"
+                      onclick="unlikeReview({review:'{{review.pk}}'})"
+                    >
+                     {%if review.unliked_by|liked:user.customer %}
+                        <i class="fa-solid fa-thumbs-down" id="{{review.id}}-unlike-button">
+                          <span class="badge rounded-pill badge-info" id="{{review.id}}-unlike-count"
+                            >{{review.unliked_by.count}}</span
+                          >
+                        </i>
+                      {%else%}
+                        <i class="fa-regular fa-thumbs-down" id="{{review.id}}-unlike-button">
+                          <span class="badge rounded-pill badge-info" id="{{review.id}}-unlike-count"
+                            >{{review.unliked_by.count}}</span
+                          >
+                        </i>
+                      {%endif%}
+                    </button>
+                  </div>
+                </div>
+                <div class="icontext">
+                  <div class="d-flex align-items-center">
+                    <img
+                      src="{{review.user.image.url}}"
+                      alt="{{review.user.image}}"
+                      style="width: 45px; height: 45px"
+                      class="rounded-circle"
+                    />
+                    <p class="ms-3 fw-bold mb-1 text-capitalize">
+                      {{review.user}}
+                    </p>
+                  </div>
+                  <div class="rating-wrap">
+                    {%for r in '12345'%} {%if review.ratings|check_star:r%}
+                    <i class="fa-solid fa-star"></i>
+                    {%else%}
+                    <i class="fa-regular fa-star"></i>
+                    {%endif%} {%endfor%}
+                    <b class="dot"></b>
+                    <small class="label-rating text-muted">
+                      {{review.reviewed_at}}
+                    </small>
+                  </div>
+                </div>
+
+                <div class="mt-3">
+                  <p>{{review.review|title}}</p>
+                </div>
+              </blockquote>
+              {%endfor%}
+            {%else%}
+              <img
+                class="img-fluid rounded mx-auto d-block"
+                src="{% static 'images/feedback.png'%}"
+                alt="Image2"
+              />
+              <p class="lead">No Reviews yet</p>
+            {%endif%}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        {% include './ratings.html' %}
+        <div class="card mt-4">
+          <div class="card-body">
+            <h5 class="card-title">Add a Review</h5>  
+            <form action="{%url 'add-commnet' item.id %}" method="post">
+              {% csrf_token %} {{review_form}}
+              <button
+                class="btn btn-primary w-100 mt-3"
+                type="submit"
+                data-mdb-ripple-color="dark"
+              >
+                Create
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<script src="{%static 'js/reviews.js' %}"></script>
