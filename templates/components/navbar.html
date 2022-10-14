@@ -1,20 +1,19 @@
+{% load search_tags %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
   <div class="container">
     <a class="navbar-brand me-2" href="{%url 'home'%}">
       <img
         src="https://cdn-icons-png.flaticon.com/512/5224/5224110.png"
-        height="16"
-      />
+        height="16" />
     </a>
-        <button
+    <button
       class="navbar-toggler"
       type="button"
       data-mdb-toggle="collapse"
       data-mdb-target="#navbarButtonsExample"
       aria-controls="navbarButtonsExample"
       aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+      aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
 
@@ -24,35 +23,20 @@
           <li class="nav-item">
             <a class="nav-link" href="{%url 'categories'%}">Categories</a>
           </li>
-        </ul>
-        <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" href="{%url 'products'%}">Products</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'orders'%}">Orders</a>
+          </li>
         </ul>
       </div>
-
-      <form class="d-flex input-group w-auto">
-        <input
-          type="search"
-          class="form-control"
-          placeholder="Type query"
-          aria-label="Search"
-        />
-        <button
-          class="btn btn-outline-primary"
-          type="button"
-          data-mdb-ripple-color="dark"
-        >
-          Search
-        </button>
-      </form>
+      {%search_form%}
       <ul class="navbar-nav">
         <li class="nav-item me-3 me-lg-1">
           <a class="nav-link" href="{%url 'cart'%}">
             <i class="fa-solid fa-shopping-bag"></i>
-            <span class="badge rounded-pill badge-notification bg-danger"
-              >
+            <span class="badge rounded-pill badge-notification bg-danger">
               {{user.customer.cart_set.get.items.count}}</span
             >
           </a>
@@ -73,35 +57,26 @@
             >
           </a>
         </li>
-                <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a
             class="nav-link d-sm-flex align-items-sm-center"
             href="#"
             id="dropdownMenuButton"
             data-mdb-toggle="dropdown"
-            aria-expanded="false"
-          >
+            aria-expanded="false">
             <img
               src="{{user.customer.image.url}}"
               class="rounded-circle"
-              style="height:32px; width:32px"
-              alt="Navbar profile image"
-            />
+              style="height: 32px; width: 32px"
+              alt="Navbar profile image" />
             <strong class="d-none d-sm-block ms-1">
-              {%if user.customer.first_name %}
-                {{user.customer.first_name}}
-              {%else%}
-                {{user.customer}}
-              {%endif%}
+              {%if user.customer.first_name %} {{user.customer.first_name}}
+              {%else%} {{user.customer}} {%endif%}
             </strong>
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
-              <a
-                class="dropdown-item"
-                href="{% url 'profile'%}"
-                >My profile</a
-              >
+              <a class="dropdown-item" href="{% url 'profile'%}">My profile</a>
             </li>
             <li>
               <a class="dropdown-item" href="{%url 'logout'%}">Logout</a>
@@ -112,4 +87,3 @@
     </div>
   </div>
 </nav>
-

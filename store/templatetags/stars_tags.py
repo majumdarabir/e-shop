@@ -5,8 +5,9 @@ from store.models import Review
 register = template.Library()
 
 
-register.filter(name='check_star',
-                filter_func=lambda rate, check: int(rate) >= int(check), is_safe=True)
+@register.filter(name='check_star')
+def check_star(rate, check):
+    return int(rate) >= int(check)
 
 
 @register.filter(name="avg_ratings")
@@ -17,6 +18,12 @@ def average_ratings(reviews):
         return 0
     avg = sum([review.ratings for review in reviews])/reviews.count()
     return round(avg, 1)
+
+
+@register.filter(name="avg_ratings_star")
+def average_rating_star(reviews, check):
+    avg = average_ratings(reviews)
+    return check_star(avg, check)
 
 
 @register.filter(name="avg_star_percentage")
