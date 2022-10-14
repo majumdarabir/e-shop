@@ -1,0 +1,89 @@
+{%extends 'base.html'%} {%load static %}{% load stars_tags %} {%block title%}
+Your Wishlist{%endblock%} {%block content%}
+<div class="container">
+  <div class="py-1 text-center">
+    <h2>Your Wishlist</h2>
+    <p class="lead">
+      🌠 It maybe not the right time to buy the product.Let it be in wish list
+      🌠
+    </p>
+  </div>
+  <div class="container">
+    {%if items.count%}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Wishlist</h5>
+        <hr class="my-4" />
+        <div class="row">
+          {% for item in items%}
+          <div class="col-lg-6 col-md-12">
+            <article class="row gy-2 align-items-center">
+              <div class="col-xl-4 col-sm-6">
+                <div class="itemside align-items-center">
+                  <div class="aside">
+                    <img
+                      src="{{item.product.image.url}}"
+                      class="img-sm img-thumbnail" />
+                  </div>
+                  <div>
+                    <div class="py-1">
+                      {%if item.review_set.count%} {%for r in '12345'%}
+                       {%if item.review_set.all|avg_ratings|check_star:r%}
+                      <i class="fa-solid fa-star"></i>
+                      {%else%}
+                      <i class="fa-regular fa-star"></i>
+                      {%endif%} {%endfor%}
+                      <b class="text-primary"
+                        >{{item.review_set.all|avg_ratings}} stars</b
+                      >
+                      {%else%}
+                      <p class="text-center text-primary">No reviews yet</p>
+                      {%endif%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-sm-6">
+                <ul class="list-check cols-two mb-4">
+                  {%for tag in item.product.tag.all%}
+                  <i class="fa-solid fa-check" style="color: green"></i>
+                  {{tag}}<br />
+                  {%endfor%}
+                </ul>
+              </div>
+              <div class="col-md-4 d-flex justify-content-lg-end">
+                <div>
+                  <span class="price h6 me-4">MRP {{item.product.price}}</span>
+                  <form action="{% url 'add-to-cart' %}" method="post">
+                    {%csrf_token%}
+                    <input type="hidden" name="item_id" value="{{item.pk}}" />
+                    <input
+                      type="hidden"
+                      name="item_count"
+                      value="1"
+                      id="{{item.pk}}-counter-value" />
+                    <button class="col-lg-12 btn btn-primary mb-0">
+                      Add To cart
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </article>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  </div>
+  {%else%}
+  <div
+    class="d-flex align-items-center justify-content-center flex-column py-3">
+    <img
+      src="{% static 'images/empty-box.png'%}"
+      alt="Empty-box"
+      class="img-fluid" />
+    <h3>No Items Found</h3>
+  </div>
+  {%endif%}
+</div>
+{%endblock%}

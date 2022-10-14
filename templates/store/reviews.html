@@ -64,7 +64,7 @@
                 <div class="icontext">
                   <div class="d-flex align-items-center">
                     <img
-                      src="/media/{{review.user.image}}"
+                      src="{{review.user.image.url}}"
                       alt="{{review.user.image}}"
                       style="width: 45px; height: 45px"
                       class="rounded-circle"
@@ -107,8 +107,7 @@
         {% include './ratings.html' %}
         <div class="card mt-4">
           <div class="card-body">
-            <h5 class="card-title">Add a Review</h5>
-            {%include 'components/messages.html'%}
+            <h5 class="card-title">Add a Review</h5>  
             <form action="{%url 'add-commnet' item.id %}" method="post">
               {% csrf_token %} {{review_form}}
               <button

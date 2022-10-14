@@ -1,9 +1,8 @@
 {%extends 'base.html'%} {%load static% } 
 {%block title%}Django-medic-shop{%endblock%} {%block content%}
-<div class="container-fluid pt-2">
+<div class="container pt-2">
   <div class="px-xl-5">{%include 'components/carousels.html'%}</div>
   {%include 'components/badges.html'%}
-
   <div class="row px-xl-3 pb-2">
     <h2 class="text-uppercase mb-2" style="text-align: center">
       all categories
@@ -13,7 +12,7 @@
       <div class="card hover-zoom ripple">
         <div class="bg-image">
           <img
-            src="/media/{{category.image}}"
+            src="{{category.image.url}}"
             class="card-image w-100"
             alt="{{category.image}}"
           />
