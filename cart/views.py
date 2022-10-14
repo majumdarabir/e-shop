@@ -26,7 +26,12 @@ def orders(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def checkout(request: HttpRequest) -> HttpResponse:
-    return render(request, "cart/checkout.html")
+    cart = Cart.objects.get(user__user=request.user)
+    if not request.user.customer.address:
+        messages.error(request,
+                       "Please provide a address that will be your billing address")
+        return redirect("profile")
+    return render(request, "cart/checkout.html", {"cart": cart})
 
 
 @login_required
@@ -58,7 +63,7 @@ def add_item_to_cart(request: HttpRequest) -> HttpResponse:
         else:
             item_model = Item.objects.get(pk=item)
             order = OrderedItem.objects.create(
-                item=item_model, user=request.user.customer, item_count=item_count)
+                item=item_model, user=request.user.customer, item_count=1)
             cart.items.add(order)
             messages.success(request, f"{order.item} added to cart")
     return redirect("cart")

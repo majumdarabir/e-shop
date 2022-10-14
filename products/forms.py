@@ -2,13 +2,18 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 
-class PricePickerForm(forms.Form):
-    min = forms.FloatField(required=True, label="Min", widget=forms.NumberInput(
-        attrs={'placeholder': 0}))
-    max = forms.FloatField(required=True, label="Max", widget=forms.NumberInput(
-        attrs={'placeholder': 0}))
+class SearchForm(forms.Form):
+    search = forms.CharField(
+        required=True,
+        max_length=200,
+        widget=forms.TextInput(
+            attrs={
 
-    def is_valid(self) -> bool:
-        if self.min > self.max:
-            raise ValidationError("min value is gr max value", code="invalid")
-        return super().is_valid()
+                "type": "search",
+                "class": "form-control",
+                "placeholder": "Type query",
+                "aria-label": "Search"
+            }
+        ),
+        label=""
+    )

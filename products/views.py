@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from .models import Category, Product
-from .forms import PricePickerForm
 
 
 def search(request: HttpRequest) -> HttpResponse:
-    pass
+    return render(request, "products/search.html")
 
 
 def show_categories(request: HttpRequest) -> HttpResponse:
@@ -20,13 +19,6 @@ def show_products(request: HttpRequest) -> HttpResponse:
         return render(request, 'products/products.html', {
             "products": products,
             "categories": categories,
-            "price_form": PricePickerForm
-        })
-    if request.method == "POST":
-        return render(request, 'products/products.html', {
-            "products": products,
-            "categories": categories,
-            "price_form": PricePickerForm
         })
 
 
