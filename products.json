@@ -1,0 +1,461 @@
+[
+  {
+    "model": "products.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Non-surgical instruments",
+      "created_at": "2022-09-16T19:23:18.785Z"
+    }
+  },
+  {
+    "model": "products.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Monitoring equipment",
+      "created_at": "2022-09-16T19:23:35.626Z"
+    }
+  },
+  {
+    "model": "products.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Wound and skincare kits",
+      "created_at": "2022-09-16T19:23:47.493Z"
+    }
+  },
+  {
+    "model": "products.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Minor procedure trays",
+      "created_at": "2022-09-16T19:24:01.953Z"
+    }
+  },
+  {
+    "model": "products.tag",
+    "pk": 5,
+    "fields": { "name": "Baby", "created_at": "2022-09-16T19:28:33.274Z" }
+  },
+  {
+    "model": "products.tag",
+    "pk": 6,
+    "fields": {
+      "name": "cleanliness",
+      "created_at": "2022-09-17T19:02:20.869Z"
+    }
+  },
+  {
+    "model": "products.tag",
+    "pk": 7,
+    "fields": { "name": "Fitness", "created_at": "2022-09-17T19:09:40.740Z" }
+  },
+  {
+    "model": "products.tag",
+    "pk": 8,
+    "fields": { "name": "cut", "created_at": "2022-09-17T19:48:41.886Z" }
+  },
+  {
+    "model": "products.tag",
+    "pk": 9,
+    "fields": {
+      "name": "Health and wellness",
+      "created_at": "2022-09-17T20:17:28.976Z"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+      "name": "Acute Care",
+      "description": "Equipment and Supplies that are used in hospitals and clinics. This type of equipment and supplies are used on a daily basis for patient care and require a medical professional to use.",
+      "created_at": "2022-09-16T19:24:05.182Z",
+      "updated_at": "2022-09-16T19:24:05.182Z",
+      "image": "categories/shutterstock-161389295.jpg",
+      "tag": [1, 2, 3, 4]
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+      "name": "Baby Care",
+      "description": "Baby care",
+      "created_at": "2022-09-16T19:28:36.453Z",
+      "updated_at": "2022-09-17T19:25:01.002Z",
+      "image": "categories/jonathan-borba-RWgE9_lKj_Y-unsplash.jpg",
+      "tag": [5]
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+      "name": "Hygine",
+      "description": "Hygiene is the practice of keeping yourself and your surroundings clean, especially in order to prevent illness or the spread of diseases. Be extra careful about personal hygiene. Synonyms: cleanliness, sanitation, disinfection, sterility More Synonyms of hygiene.",
+      "created_at": "2022-09-17T19:02:23.011Z",
+      "updated_at": "2022-09-17T19:02:23.011Z",
+      "image": "categories/Personal-Hygiene-for-Kids-min-1200x1000.jpg",
+      "tag": [6]
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+      "name": "Vitamins",
+      "description": "Vitamins and minerals are micronutrients required by the body to carry out a range of normal functions. However, these micronutrients are not produced in our bodies and must be derived from the food we eat.",
+      "created_at": "2022-09-17T19:09:57.514Z",
+      "updated_at": "2022-09-17T19:09:57.514Z",
+      "image": "categories/vitamins-5211139_1920.jpg",
+      "tag": [5, 7]
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+      "name": "Health food and drinks",
+      "description": "",
+      "created_at": "2022-09-18T00:00:00Z",
+      "updated_at": "2022-09-18T00:00:00Z",
+      "image": "categories/ThinkstockPhotos-488214714-1.jpg",
+      "tag": [9]
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+      "name": "Covid Essentials",
+      "description": "As we face the challenges thrown at us and have to deal with a deadly pandemic, we feel the need to be safer than ever before. Covid has already claimed so many lives and it only makes sense to take proper precautions to stay safe and keep in mind the safety of our loved ones. Covid essentials include hand sanitisers, face masks, face shields, disinfectant sprays, gloves, gowns etc. From kids to older people, everyone feels the necessity of having covid essentials handy while stepping out. Along with these you must eat a healthy diet and take your vitamins so that your immunity is at its strongest.",
+      "created_at": "2022-09-27T18:16:40.886Z",
+      "updated_at": "2022-09-27T18:16:40.886Z",
+      "image": "categories/personal-care-assistant-role.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+      "name": "Beauty Products",
+      "description": "",
+      "created_at": "2022-09-27T18:19:06.539Z",
+      "updated_at": "2022-09-27T18:19:06.539Z",
+      "image": "categories/422_main.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 9,
+    "fields": {
+      "name": "Accessories and Wearables",
+      "description": "",
+      "created_at": "2022-09-27T18:21:23.273Z",
+      "updated_at": "2022-09-27T18:21:23.273Z",
+      "image": "categories/smart-watch.original.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 10,
+    "fields": {
+      "name": "Elderly Care",
+      "description": "",
+      "created_at": "2022-09-27T18:22:23.595Z",
+      "updated_at": "2022-09-27T18:22:23.595Z",
+      "image": "categories/elderly-care_759_getty.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 11,
+    "fields": {
+      "name": "Sexual Wellness",
+      "description": "",
+      "created_at": "2022-09-27T18:24:12.996Z",
+      "updated_at": "2022-09-27T18:24:12.996Z",
+      "image": "categories/teaser_image_613670.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 12,
+    "fields": {
+      "name": "Ayurvedic",
+      "description": "",
+      "created_at": "2022-09-27T18:25:00.155Z",
+      "updated_at": "2022-09-27T18:25:00.155Z",
+      "image": "categories/ayurvedic-products-less-than-1-per-cent-of-indias-fmcg-market-kantar-worldpanel.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 13,
+    "fields": {
+      "name": "Skin Care",
+      "description": "",
+      "created_at": "2022-09-27T18:25:56.367Z",
+      "updated_at": "2022-09-27T18:25:56.367Z",
+      "image": "categories/download.jpeg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "name": "First Aid Box",
+      "price": 300.0,
+      "category": 4,
+      "created_at": "2022-09-18T00:00:00Z",
+      "updated_at": "2022-10-01T12:44:52.168Z",
+      "description": "Medical Box by best buy � Organised and Compact Storage for your Medicines This medical box from best buy has a compact shape which makes it portable and easy to store. It is easy to carry around because it has been ergonomically designed with a handle. In case of emergencies, the user-friendly closure system can be easily snapped open with a simple motion of the index finger and the thumb. The see-through lid makes it easy for you to identify the medicines without opening the box. The segregation tray makes more space in the box by dividing the box into two compact sections. Stay prepared in case of emergencies with this ergonomically designed medical box from best buy best buy Plastic Medical Box With Handle and Partition Tray. Keep your Medicines Secure and Easily Accessible. Overcome medical emergencies and keep your medicines organized with this medical box. Made from high quality and durable food grade plastic. This medical box features a see-through lid for easy accessibility. Furthermore, the partitioned tray makes it easy to segregate your medicines and important items based on usage and type of necessity. Sturdy Build and Compact Design for Easy Portability. The BROWN & GREEN medical box is made from highly durable material which facilitates long-term use. With its compact design, you can fit a large number of medicines while keeping it organized for regular usage. Armed with an ergonomic handle, the BROWN & GREEN first-aid medical box is perfect for portable use.",
+      "image": "products/Johnsonjohnson-b0492cfd4f84412c83cec26972eeec97.jpeg",
+      "tag": [6, 8]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "name": "Horlicks",
+      "price": 100.0,
+      "category": 6,
+      "created_at": "2022-09-18T00:00:00Z",
+      "updated_at": "2022-10-03T14:57:27.069Z",
+      "description": "Horlicks, made from Milk, Wheat and 27 vital nutrients, helps children become taller, stronger and sharper. Let them continue to amaze you with their growth!\r\nHorlicks contains nutrients that get absorbed in the blood and reach all parts of the body. These nutrients are utilised for all-round growth and development.",
+      "image": "products/51vePnCvOfL._SL1000_.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "name": "First aid box",
+      "price": 200.0,
+      "category": 4,
+      "created_at": "2022-09-21T17:32:35.161Z",
+      "updated_at": "2022-09-21T20:51:15.626Z",
+      "description": "",
+      "image": "products/41UMlMtw05L.jpg",
+      "tag": [2, 3, 4, 6, 8]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "name": "a product",
+      "price": 400.0,
+      "category": 6,
+      "created_at": "2022-09-22T20:37:13.127Z",
+      "updated_at": "2022-09-22T20:37:13.127Z",
+      "description": "Its very healthy",
+      "image": "products/ThinkstockPhotos-488214714-1.jpg",
+      "tag": [9]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "name": "Venusia Max Intensive Moisturizing Cream, For Dry",
+      "price": 554.5,
+      "category": 13,
+      "created_at": "2022-09-27T18:29:16.547Z",
+      "updated_at": "2022-09-27T18:29:16.547Z",
+      "description": "Dry and dull skin can take all your charm away. Do you want that to happen to you? Your answer will be no. So, get Venusia Max Intensive Moisturizing Cream for you to get rid of dry and dull skin and keep your glow intact. Our moisturizing cream for dry skin contains glycerin, shea butter, aloe butter, mango butter, and cocoa butter, all of which effectively improve the quality of your skin and transform it from dull to lively. It also enhances skin barriers by protecting your skin from dirt and pollution while keeping it hydrated for as long as 10 hours. Our moisturizing cream is dermatologically tested to be hypoallergenic and safe for your skin. It is entirely paraben, mineral oil, alcohol, and animal origin ingredients free. Apply it daily to get visibly healthy and shiny skin!",
+      "image": "products/51FjwRgDiUL._SL1500_.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+      "name": "Himalaya Purifying Neem Face Wash 150ml",
+      "price": 154.0,
+      "category": 13,
+      "created_at": "2022-09-27T18:30:46.156Z",
+      "updated_at": "2022-09-27T18:30:46.156Z",
+      "description": "Himalaya purifying neem face wash is a face wash that gives clear, pure, radiant and smooth skin. This Ayurvedic face wash contains neem and turmeric as active ingredients. Neem, an excellent skin-care ingredient, is antibacterial, while turmeric is a herbal anti-inflammatory ingredient that soothes the skin and evens skin tone. It is a soap-free formula with no additional chemicals like Parabens, SLS, etc. Himalaya purifying neem wash comes in a pack of 150 ml to make your skin healthy and free from pimples.",
+      "image": "products/51wEn-4MRlS._SL1500_.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+      "name": "Sebamed Clear Face Foam - 150ml",
+      "price": 475.0,
+      "category": 13,
+      "created_at": "2022-09-27T18:32:40.651Z",
+      "updated_at": "2022-09-27T18:32:40.651Z",
+      "description": "Sebamed gives complete skin health management answers for all age gatherings, which support the skin's characteristic obstruction with pH 5.5. The skin health management arrangements incorporate Age Defense, Clear Face, and Baby Sebamed. All Sebamed items are clinically tried on delicate skin and are not tried on animals.\r\n\r\nIt adequately enters the pores for gentle pore-profound purging. The new antibacterial dynamic fixing Montaline C40 is a Coconut Oil subordinate. It secures the skin against lipid disintegration during purification and gives a hydrating and smoothing impact.",
+      "image": "products/61ibIj47jKL._SL1500_.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+      "name": "Tetmosol Medicated Soap For Relief From Skin Infec",
+      "price": 75.0,
+      "category": 13,
+      "created_at": "2022-09-27T18:35:29.814Z",
+      "updated_at": "2022-09-27T18:35:29.814Z",
+      "description": "Tetmosol Soap is a lime fragrance medicated soap that is often prescribed to deal with a variety of dermatological issues. Tetmosol Soap can be used by adults and children, both on the body as well as the scalp to provide relief from itching, sores, crusting and flaking as well as rashes. With regular use, this medicated soap from Tetmosol brings much-needed healing and relief to those suffering from skin problems. Use this soap under medical advice.",
+      "image": "products/tet0005.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+      "name": "Dettol Intense Cool Bathing Soap Bar With Menthol-",
+      "price": 302.0,
+      "category": 13,
+      "created_at": "2022-09-27T18:36:37.795Z",
+      "updated_at": "2022-09-27T18:36:37.795Z",
+      "description": "Dettol Cool Soap has been dermatologically tested and kills 100 germs that cause human illnesses. Dettol soap is safe and hygienic and behaves as a barrier between your skin and harmful microorganisms in your environment. With a fresh menthol formula, this Dettol Cool Soap bar keeps you protected, cool and moisturized, leaving you ready to take on the day!",
+      "image": "products/61CueU6L6wL._SL1000_.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+      "name": "Dabur Odomos Naturals Cream 100gm",
+      "price": 86.0,
+      "category": 13,
+      "created_at": "2022-09-27T18:37:49.466Z",
+      "updated_at": "2022-09-27T18:37:49.466Z",
+      "description": "Some of the best childhood memories happen outdoors, till it is interrupted by stinging menaces called mosquitoes. They are everywhere - hiding under the school desk, at the bus stop or in the playground. The threat of dreadful mosquito-causing diseases like Dengue, Chikungunya and Malaria stops you from letting kids enjoy the outdoors. Instead of relying on harmful mosquito-killing chemicals, put your faith in the natural ingredients of Dabur Odomos Naturals Non-Sticky Mosquito Repellent Cream instead to shield your entire family from bites by hiding your scent from those pesky disease carriers.",
+      "image": "products/7137t8JMphL._SL1500_.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+      "name": "Everherb Karela Jamun Juice - Helps Maintains Heal",
+      "price": 207.0,
+      "category": 12,
+      "created_at": "2022-09-27T18:39:47.620Z",
+      "updated_at": "2022-09-27T18:39:47.620Z",
+      "description": "EverHerb Karela Jamun Juice is formulated with the extracts of Karela or bitter gourd and the whole Jamun fruit. Since ancient times, Karela and Jamun have been used to keep blood sugar levels steady. Bitter gourd is a natural blood-sugar controller and has been used by Ayurvedic doctors for centuries to help diabetes patients. When used along with appropriate medication, a healthy diet and regular exercise, EverHerb Karela Jamun Juice can be helpful to keep blood glucose levels in check.\r\n\r\nMoreover, EverHerb Karela Jamun Juice can also help speed up digestion and aid in preventing hyperacidity or acid reflux. It can help to remove toxins from the blood and can aid in improving the body�s immunity to prevent infections and can also manage cough. Because of its hydrating effect on the bowels, it can help to ease constipation. EverHerb Karela Jamun Juice is 100 % natural and vegan. It contains no added sugar.",
+      "image": "products/download_1.jpeg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+      "name": "Himalaya Liv.52 Ds Tablets - 60'S",
+      "price": 142.0,
+      "category": 12,
+      "created_at": "2022-09-27T18:40:43.949Z",
+      "updated_at": "2022-09-27T18:40:43.949Z",
+      "description": "The Himalaya Liv 52 DS is a liver support supplement that ensures the healthy functioning of the liver. It essentially contains hepatoprotective agents and also has certain antioxidant properties. This health supplement is a herbal medication that actively protects the liver from external damage due to chemicals. The Himalaya Liv 52 DS also has an antiperoxidative activity that helps maintain the functionality and structural integrity of the liver cell membranes.",
+      "image": "products/download_2.jpeg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+      "name": "Himalaya Tentex Forte Tablets - 10'S",
+      "price": 82.0,
+      "category": 11,
+      "created_at": "2022-09-27T18:42:07.183Z",
+      "updated_at": "2022-09-27T18:42:07.183Z",
+      "description": "Himalaya is a reputed and trusted brand that manufactures wellness products and takes extra care of quality and affordability. Himalaya Tentex Forte tablet contains natural ingredients that possess tonic and aphrodisiac properties, which enhances sexual desire, sexual drive and performance. Tentex forte is meant for men as it effectively increases the testosterone levels in the body, preventing erectile dysfunction.",
+      "image": "products/519nUulVBlL._SY450_.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+      "name": "Durex Mutual Climax Packet Of 10 Condoms",
+      "price": 291.0,
+      "category": 11,
+      "created_at": "2022-09-27T18:43:21.348Z",
+      "updated_at": "2022-09-27T18:43:21.348Z",
+      "description": "The Durex Mutual Climax condoms come in a packet of 10 pieces and as the name suggests, are designed to provide mutual climax for both partners. These condoms are made with a special technology known as performa lubricant that enables them to last longer. Thus ensuring a more pleasurable experience for both partners during intercourse. This special lubricant that lines the inside wall of the condom is known as a Benzocaine lubricant. Durex condoms are made of pure latex material and are extremely easy to put on.",
+      "image": "products/61dBv28oqAL._SL1000_.jpg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+      "name": "I Can Pregnancy Test Kit",
+      "price": 35.0,
+      "category": 11,
+      "created_at": "2022-09-27T18:44:15.430Z",
+      "updated_at": "2022-09-27T18:44:15.430Z",
+      "description": "The I Can pregnancy test kit is a very handy tool for women to know whether they are pregnant or not. Since being pregnant is wonderful and joyous news for most women, this pregnancy test kit can help them confirm this joy right at home. The pregnancy detection kit is highly accurate and gives results in just 5 minutes. This device works by detecting the levels of Human Chorionic Gonadotropin (HCG) Hormone, which is more popularly known as the pregnancy hormone. If a woman has conceived, the levels of this hormone go up and can be detected in the urine.",
+      "image": "products/i-can-pregnancy-test-kit-1-1654078700.webp",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+      "name": "Zandu Vigorex Gold Vigor Improvement Capsules Bott",
+      "price": 399.0,
+      "category": 11,
+      "created_at": "2022-09-27T18:45:16.158Z",
+      "updated_at": "2022-09-27T18:45:16.158Z",
+      "description": "Zandu Vigorex Gold is a daily energizer capsule formulated with ayurvedic ingredients. Zandu Vigorex Gold not only boosts energy throughout the day but helps to deal with stress and lower fatigue. This capsule is a health supplement and a singular source of a variety of benefits in a simple, easy-to-consume capsule that can have long-lasting effects for the improvement of your health.",
+      "image": "products/zandu-vigorex-gold-vigor-improvement-capsules-bottle-of-20-2-1641788846.webp",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 17,
+    "fields": {
+      "name": "Manforce Wild Condoms Combo Pack 20'S",
+      "price": 127.0,
+      "category": 11,
+      "created_at": "2022-09-27T18:46:55.221Z",
+      "updated_at": "2022-09-27T18:46:55.221Z",
+      "description": "Manforce Condoms is a premium quality condom brand, which is manufactured under the guidelines of ISO certification. Manforce promotes safe sex through its exciting range of flavoured condoms. The arousing variants have been created keeping your pleasure and satisfaction in mind. An amazingly lubricated condom, Manforce Wild Condoms also eases friction and avoids stickiness for ultimate comfort and enjoyment for her too. What�s more, is that these condoms also are made to smell better, which helps dodge distractions for an involving experience for both partners. The Manforce Condoms provide great sensitivity and intimacy while still providing a high level of protection. Manforce condoms are dermatologically tested to ensure strength and are made of premium quality latex while being very reliable.",
+      "image": "products/download_3.jpeg",
+      "tag": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 18,
+    "fields": {
+      "name": "Frido Dual Gel Insoles| Unisex Shoe Inserts For Work And Casual Shoes|Size 9-13 Uk|Pack Of 1 Pair",
+      "price": 900.0,
+      "category": 10,
+      "created_at": "2022-09-27T18:52:57.473Z",
+      "updated_at": "2022-09-27T18:52:57.473Z",
+      "description": "",
+      "image": "products/chappal.webp",
+      "tag": []
+    }
+  }
+]
