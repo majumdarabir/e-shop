@@ -1,0 +1,30 @@
+<div
+  class="modal fade"
+  id="deleteAccount"
+  tabindex="-1"
+  aria-labelledby="deleteAccountLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="profileModalLabel">
+          😠Do you really want to delete account <strong>{{user}}</strong>?
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-mdb-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-mdb-dismiss="modal">
+          Close
+        </button>
+        <a href="{%url 'delete-account' %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>

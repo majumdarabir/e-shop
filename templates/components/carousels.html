@@ -1,0 +1,116 @@
+{%load static%}
+<div
+  div
+  id="carouselExampleIndicators"
+  class="carousel slide"
+  data-mdb-ride="carousel"
+>
+  <div class="carousel-inner">
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-mdb-target="#carouselBasicExample"
+        data-mdb-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-mdb-target="#carouselBasicExample"
+        data-mdb-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-mdb-target="#carouselBasicExample"
+        data-mdb-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+      <button
+        type="button"
+        data-mdb-target="#carouselBasicExample"
+        data-mdb-slide-to="3"
+        aria-current="true"
+        aria-label="Slide 4"
+      ></button>
+    </div>
+
+    <div class="carousel-item active" style="height: 500px">
+      <img
+        class="img-fluid"
+        src="{% static 'images/carosel-image-2.jpg'%}"
+        alt="Image"
+      />
+      <div
+        class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+      >
+        <div class="p-3" style="max-width: 700px">
+          <h4 class="text-light text-uppercase font-weight-medium mb-3">
+            10% Off Your First Order
+          </h4>
+          <h3 class="text-white font-weight-semi-bold mb-4">
+            Find All You Need In One Place
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item" style="height: 500px">
+      <img
+        class="img-fluid"
+        src="{% static 'images/carosel-image-1.jpg'%}"
+        alt="Image2"
+      />
+      <div
+        class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+      >
+        <div class="p-3" style="max-width: 700px">
+          <h4 class="text-light text-uppercase font-weight-medium mb-3">
+            Reasonable Prices
+          </h4>
+          <h3 class="text-white font-weight-semi-bold mb-4">
+            The Prices are regular to that of market
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item" style="height: 500px">
+      <img
+        class="img-fluid"
+        src="{% static 'images/carosel-image-3.jpg'%}"
+        alt="Image2"
+      />
+      <div
+        class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+      >
+        <div class="p-3" style="max-width: 700px">
+          <h4 class="text-light text-uppercase font-weight-medium mb-3">
+            We Love your Users
+          </h4>
+          <h3 class="text-white font-weight-semi-bold mb-4">
+            Users are first priority for us
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item" style="height: 500px">
+      <img
+        class="img-fluid"
+        src="{% static 'images/carosel-image-4.jpg'%}"
+        alt="Image2"
+      />
+      <div
+        class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+      >
+        <div class="p-3" style="max-width: 700px">
+          <h4 class="text-light text-uppercase font-weight-medium mb-3">
+            A different Way
+          </h4>
+          <h3 class="text-white font-weight-semi-bold mb-4">
+            Get to know the different way of shopping
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

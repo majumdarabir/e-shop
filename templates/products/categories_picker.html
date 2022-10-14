@@ -1,0 +1,45 @@
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingTwoX">
+    <button
+      class="accordion-button collapsed show"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#flush-collapseTwoX"
+      aria-expanded="true"
+      aria-controls="flush-collapseTwoX"
+    >
+      Catergories
+    </button>
+  </h2>
+  <div
+    id="flush-collapseTwoX"
+    class="accordion-collapse collapse"
+    aria-labelledby="flush-headingTwoX"
+    data-mdb-parent="#accordionCategoryPicker"
+  >
+    <div class="accordion-body">
+      <div class="list-group list-group-light">
+        <a
+          class="list-group-item list-group-item-action px-0 border-0"
+          href="{%url 'products'%}"
+          aria-current="true"
+        >
+          <div class="ms-3">
+            <small class="text-capitalize">All</small>
+          </div>
+        </a>
+        {%for category in categories%}
+        <a
+          class="list-group-item list-group-item-action px-0 border-0 {%if current_category == category %} active {%endif%}"
+          href="{%url 'product-of-category' category.pk %}"
+          aria-current="true"
+        >
+          <div class="ms-3">
+            <small class="text-capitalize">{{category.name}}</small>
+          </div>
+        </a>
+        {%endfor%}
+      </div>
+    </div>
+  </div>
+</div>
